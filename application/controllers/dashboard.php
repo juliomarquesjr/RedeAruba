@@ -68,15 +68,21 @@ class Dashboard extends CI_Controller {
         $this->load->view('includes/footer');
     }
 
-    public function envia_cobranca() {
-        $this->form_validation->set_rules('valor', 'Aqui fica mensagem de erro', 'required|');
-        
+    public function envia_cobranca() {   
         global $dados_menu;
         $dados_menu['titulo_interno'] = 'Enviar Cobrança';
         $dados_menu['sub_titulo_interno'] = '** Envie cobrança para os clientes da rede';
+        
+        $this->form_validation->set_rules('valor', 'Valor cobrado', 'required|alpha|ucwords');
 
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
+        
+        /*Verifica se a validação passou*/
+        if($this->form_validation->run() == TRUE){
+        echo 'Validação OK, Inserir no banco';
+        }
+        
         $this->load->view('cobranca');
         $this->load->view('includes/footer');
     }
