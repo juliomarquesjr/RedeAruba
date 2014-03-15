@@ -16,9 +16,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="<?php echo base_url($pg_ini);?>" ><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="<?php echo base_url($pg_ini);?>" ><i class="fa fa-dashboard"></i>&nbsp; Dashboard</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Usu&aacute;rios <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; Usu&aacute;rios <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href=" <?php echo base_url($pg_cad_usr); ?> ">Incluir usu&aacute;rio</a></li>
                         <li><a href="<?php echo base_url($pg_user_cadastrados); ?>">Rela&ccedil;&atilde;o de usu&aacute;rios</a></li>
@@ -27,21 +27,21 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Dipositivos <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i>&nbsp; Dipositivos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url($pg_cad_dispositivos); ?>">Incluir dispositivo </a></li>
                         <li><a href="#">Dispositivos cadastrados</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-caret-square-o-down"></i> Pagamentos <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i>&nbsp; Pagamentos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url($pg_envia_cobranca);?>">Enviar cobrança </a></li>
                         <li><a href="#">Debitar pagamento </a></li>
                         <li><a href="#">Rela&ccedil;&atilde;o de pagamentos</a></li>
                     </ul>
                 </li>
-                <li><a href="#"><i class="fa fa-wrench"></i> Ferramentas</a></li>   
+                <li><a href="#"><i class="fa fa-wrench"></i>&nbsp; Ferramentas</a></li>   
             </ul>
 
             <ul class="nav navbar-nav navbar-right navbar-user">
