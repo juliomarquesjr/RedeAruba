@@ -62,13 +62,15 @@ class Dashboard extends CI_Controller {
     }
 
     public function rel_usuarios() {
+        global $dados_menu;
+        
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
         $this->load->view('enviar_msg');
         $this->load->view('includes/footer');
     }
 
-    public function envia_cobranca() {   
+    public function cobranca() {   
         global $dados_menu;
         $dados_menu['titulo_interno'] = 'Enviar Cobrança';
         $dados_menu['sub_titulo_interno'] = '** Envie cobrança para os clientes da rede';

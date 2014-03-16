@@ -8,9 +8,10 @@
 
         <title>Login</title>
         <link rel="icon" type="image/png" href="<?php echo base_url('icon.ico'); ?>">
-        <link href="<?php echo base_url('assets/css/bootstrap.css"'); ?> rel="stylesheet">
+        <link href="<?php echo base_url('assets/css/bootstrap.css"'); ?>" rel="stylesheet">
               <link href="<?php echo base_url('assets/css/sb-admin.css?'); ?>" rel="stylesheet">   
         <link rel="stylesheet" href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>">
+
     </head>
 
     <body background="<?php echo base_url('assets/img/fundo_login.png'); ?>" >
@@ -36,12 +37,34 @@
                         <h4 class="modal-title" id="myModalLabel">Acesso ao Sistema</h4>
                     </div>
                     <div class="modal-body">
-                        ...
+                        <?php
+                        echo form_open('login/verifica', 'role="form"');
+                        
+                        echo validation_errors(
+                    "<div class=\"alert alert-warning alert-dismissable\">
+                        <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
+                            <strong>Atenção!</strong> ", "</div>");
+                        
+                        echo "<div class=\"form-group\"><label>Nome de Usuario</label>";
+                        echo form_input(array('name' => 'usuario', 'id' => 'usuario', 'class' => 'form-control'), set_value('nome'));
+                        echo "</div>";
+
+                        echo "<div class=\"form-group\"><label>Nome de Usuario</label>";
+                        echo form_password(array('name' => 'senha', 'id' => 'senha', 'class' => 'form-control'), '');
+                        echo "</div>";
+                        
+
+                        echo "
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Sair</button>
-                        <a role="button" class="btn btn-primary" href="<?php echo base_url('dashboard');?>">Login</a>
+                    <div class=\"modal-footer\">
+                        <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Sair</button>" .
+                                
+                        form_submit(array('name' => 'enviar', 'value' => 'Enviar', 'class' => 'btn btn-primary')) .
+                        form_close();
+                        "</div>";
+                        ?>
+
                     </div>
                 </div>
             </div>
-        </div>
+
