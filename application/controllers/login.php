@@ -21,6 +21,7 @@ class Login extends CI_Controller {
         /*Verifica se a validação passou*/
         if($this->form_validation->run() == TRUE){
             //Criar um metodo para consulta de usuario e senha no banco.
+            //Criar model
             redirect('dashboard'); //Redirecino para tela de login.
         }
         else{
