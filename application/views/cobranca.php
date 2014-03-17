@@ -26,14 +26,14 @@
              */
 
             echo "<div class=\"form-group\"><label>Valor Cobrado</label>";
-            echo form_input(array('name' => 'valor', 'class' => 'form-control', 'placeholder' => 'Valor em reais'), set_value('nome'));
+            echo form_input(array('name' => 'valor', 'class' => 'form-control', 'placeholder' => 'Valor em reais'), set_value('valor'));
             echo "</div>";
             
             echo "<div class=\"form-group\"><label>Descrição</label>";
-            echo form_textarea(array('name' => 'obs', 'class' => 'form-control'), '');
+            echo form_textarea(array('name' => 'obs', 'class' => 'form-control'), set_value('obs'));
             echo "</div>";
 
-            echo form_submit(array('name' => 'enviar', 'value' => 'Enviar Mensagem', 'class' => 'btn btn-success'));
+            echo form_submit(array('name' => 'enviar', 'class' => 'btn btn-success'), 'Cadastrar');
             echo form_close();
             /*
              * Final do formulario
