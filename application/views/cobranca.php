@@ -33,7 +33,7 @@
             echo form_textarea(array('name' => 'obs', 'class' => 'form-control'), set_value('obs'));
             echo "</div>";
 
-            echo form_submit(array('name' => 'enviar', 'class' => 'btn btn-success'), 'Cadastrar');
+            echo form_submit(array('name' => 'enviar', 'class' => 'btn btn-primary'), 'Cadastrar');
             echo form_close();
             /*
              * Final do formulario
