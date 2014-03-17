@@ -11,7 +11,7 @@
             /*
              * Inicializa o formulario
              */
-            echo form_open('dashboard/envia_cobranca', 'role = \"form\"');
+            echo form_open('dashboard/cobranca', 'role = \"form\"');
 
             /**
              * Exibe mensagem de erro dos campos.

@@ -15,8 +15,16 @@ class Login extends CI_Controller {
     
     public function verifica(){
         
-        $this->form_validation->set_rules('usuario', 'Usuario', 'required|trim');
+        $this->form_validation->set_rules('usuario', 'Nome Usuário', 'required|trim');
+        $this->form_validation->set_rules('senha', 'Senha', 'required');
         
+        /*Verifica se a validação passou*/
+        if($this->form_validation->run() == TRUE){
+        echo "Passei";
+        }
+        else{
+        $this->load->view('login/login');
+        $this->load->view('includes/footer');
+        }
     }
-
 }
