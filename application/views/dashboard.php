@@ -19,7 +19,7 @@
               <div class="panel-body">
                 <div class="list-group">
                   <a href="#" class="list-group-item">
-                    <span class="badge badge-vermelho">Online</span>
+                    <span class="badge badge-verde">Online</span>
                     <i class="fa fa-globe"></i> &nbsp;Serviço da Internet
                   </a>
                   <a href="#" class="list-group-item">
