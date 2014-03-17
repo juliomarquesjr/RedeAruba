@@ -26,7 +26,11 @@
              */
 
             echo "<div class=\"form-group\"><label>Valor Cobrado</label>";
-            echo form_input(array('name' => 'valor', 'class' => 'form-control', 'placeholder' => 'Valor em reais'), set_value('nome'), 'autofocus');
+            echo form_input(array('name' => 'valor', 'class' => 'form-control', 'placeholder' => 'Valor em reais'), set_value('nome'));
+            echo "</div>";
+            
+            echo "<div class=\"form-group\"><label>Descrição</label>";
+            echo form_textarea(array('name' => 'obs', 'class' => 'form-control'), '');
             echo "</div>";
 
             echo form_submit(array('name' => 'enviar', 'value' => 'Enviar Mensagem', 'class' => 'btn btn-success'));
