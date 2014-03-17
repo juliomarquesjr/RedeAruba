@@ -11,13 +11,7 @@
         <link href="<?php echo base_url('assets/css/bootstrap.css"'); ?>" rel="stylesheet">
               <link href="<?php echo base_url('assets/css/sb-admin.css?'); ?>" rel="stylesheet">   
         <link rel="stylesheet" href="<?php echo base_url('assets/font-awesome/css/font-awesome.min.css'); ?>">
-        <script>
-        $(document).ready(function(){
-            alert("Passei");
-            //$('#loginModal').modal('show');
-            //console.log($('erros').html());
-        });
-        </script>
+       
     </head>
 
     <body background="<?php echo base_url('assets/img/fundo_login.png'); ?>" >
@@ -50,18 +44,12 @@
                     <div class="modal-body">
                         <?php
                         echo form_open('login/verifica', 'role="form"');
-                        
-                        
-                        
                         echo "<div class=\"form-group\"><label>Nome de Usuario</label>";
-                        echo form_input(array('name' => 'usuario', 'id' => 'usuario', 'class' => 'form-control'), set_value('nome'));
+                        echo form_input(array('name' => 'usuario', 'class' => 'form-control'), set_value('usuario'));
                         echo "</div>";
-
                         echo "<div class=\"form-group\"><label>Senha</label>";
-                        echo form_password(array('name' => 'senha', 'id' => 'senha', 'class' => 'form-control'), '');
+                        echo form_password(array('name' => 'senha', 'class' => 'form-control'), '');
                         echo "</div>";
-                        
-
                         echo "
                     </div>
                     <div class=\"modal-footer\">
