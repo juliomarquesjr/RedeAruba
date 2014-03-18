@@ -21,10 +21,10 @@
                     "<div class=\"alert alert-warning alert-dismissable\">
                         <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
                             <strong>Atenção!</strong> ", "</div>");
+            
             /*
              * Fim da exibição de erros.
              */
-
             echo "<div class=\"form-group\"><label>Valor Cobrado</label>";
             echo form_input(array('name' => 'valor', 'class' => 'form-control', 'placeholder' => 'Valor em reais'), set_value('valor'));
             echo "</div>";
