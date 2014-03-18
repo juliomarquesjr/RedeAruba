@@ -36,12 +36,13 @@ class Dashboard extends CI_Controller
         global $dados_menu;
         $dados_menu['titulo_interno'] = 'Incluir Usuário';
         $dados_menu['sub_titulo_interno'] = '** Cadastro de usuários que utilizam a rede.';
-        
+
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
 
-        $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|trim');
-        $this->form_validation->set_rules('');
+        $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|is_unique[usuarios.nome]');
+        $this->form_validation->set_message('is_unique', 'O %s já existe cadastrado.');
+        $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('cad_usuario');
