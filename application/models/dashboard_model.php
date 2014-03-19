@@ -6,6 +6,8 @@ class Dashboard_model extends CI_Model
         
         if($dados != NULL){
           $this->db->insert('usuarios', $dados);  
+          $this->session->set_flashdata('insereOK', TRUE);
+          redirect('dashboard/cad_user');
         }
     }
 }

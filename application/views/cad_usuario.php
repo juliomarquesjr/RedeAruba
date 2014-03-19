@@ -9,7 +9,14 @@
             </ol>
             <?php
             echo form_open('dashboard/cad_user', 'role="form"');
-
+            
+            if($this->session->flashdata('insereOK') == TRUE):
+            echo "<div class=\"alert alert-success alert-dismissable\">
+                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
+                <strong>Sucesso!</strong> Usuário cadastrado com sucesso.
+                </div>";
+            endif;
+            
             /* Nome do Usuário */
             if (form_error('nomecompleto') == TRUE) {
                  echo "<div class=\"form-group has-error\">
@@ -23,8 +30,7 @@
                 echo form_input(array('name' => 'nomecompleto', 'class' => 'form-control', 'placeholder' => 'Nome do Usuário'), set_value('nomecompleto'), 'autoload');
                 echo "</div>";
             }
-
-            
+           
             /* Email */
             if (form_error('email') == TRUE) {
                 echo " <div class=\"form-group has-error\">
@@ -42,7 +48,7 @@
             
             /* Bloco do Usuario */
             echo "<div class=\"form-group\">
-                      <label for=\"bloco\">Bloco / Pr&eacute;dio</label>
+                      <label name= \"bloco\" for=\"bloco\">Bloco / Pr&eacute;dio</label>
                       <select multiple class=\"form-control\">
                           <option value=\"A\">Bloco A</option>
                           <option value=\"B\">Bloco B</option>

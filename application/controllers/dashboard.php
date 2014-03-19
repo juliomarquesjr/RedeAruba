@@ -18,6 +18,8 @@ class Dashboard extends CI_Controller
         $this->load->helper('form');
         $this->load->library('form_validation');
         $this->load->helper('array');
+        $this->load->helper('url');
+        $this->load->library('session');
     }
 
     public function index()
@@ -41,9 +43,9 @@ class Dashboard extends CI_Controller
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
         $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|trim]');
-        $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+        $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|is_unique[usuarios.email]');
         $this->form_validation->set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
-        $this->form_validation->set_message('is_unique', 'Já existe um cadastro para de %s, por favor tente outro.');
+        $this->form_validation->set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
         $this->form_validation->set_rules('telefone', 'Telefone', 'required|alpha_numeric|');
         $this->form_validation->set_rules('username', "Username", 'required|aplha|is_unique[usuarios.username]');
         
@@ -51,9 +53,11 @@ class Dashboard extends CI_Controller
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('cad_usuario');
         } else {
-            $dadosBanco = element(array('nomecompleto','email','apartamento', 'telefone', 'username'), $this->input->post());
+            $dadosBanco = elements(array('nomecompleto','email','apartamento', 'telefone', 'username', 'senha', 'bloco'), $this->input->post());
             $this->load->model('dashboard_model');
-            $this->dashboard_model->do_insert($dados);      
+            $dadosBanco['senha'] = md5("1234");
+            $this->dashboard_model->do_insert($dadosBanco);      
+            print_r($dadosBanco);
         }
         $this->load->view('includes/footer');
     }
