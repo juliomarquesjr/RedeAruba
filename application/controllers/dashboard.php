@@ -1,5 +1,4 @@
 <?php
-
 $dados_menu = array(
     'titulo' => "Aruba Server :: Servidor de Internet",
     'titulo_interno' => 'Titulo',
@@ -13,12 +12,12 @@ $dados_menu = array(
 
 class Dashboard extends CI_Controller
 {
-
     function __construct()
     {
         parent::__construct();
         $this->load->helper('form');
         $this->load->library('form_validation');
+        $this->load->helper('array');
     }
 
     public function index()
@@ -30,30 +29,32 @@ class Dashboard extends CI_Controller
         $this->load->view('dashboard');
         $this->load->view('includes/footer');
     }
-
+    
+    /* Cadastro de Usuarios */
     public function cad_user()
     {
         global $dados_menu;
         $dados_menu['titulo_interno'] = 'Incluir Usuário';
         $dados_menu['sub_titulo_interno'] = '** Cadastro de usuários que utilizam a rede.';
-
+        
+        /*Regras de validação do formulario */
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
-
-        $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|is_unique[usuarios.nome]');
-        $this->form_validation->set_message('is_unique', 'O %s já existe cadastrado.');
+        $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|trim]');
         $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
         $this->form_validation->set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
-        $this->form_validation->set_message('is_unique', 'O %s já existe cadastrado.');
+        $this->form_validation->set_message('is_unique', 'Já existe um cadastro para de %s, por favor tente outro.');
         $this->form_validation->set_rules('telefone', 'Telefone', 'required|alpha_numeric|');
-        $this->form_validation->set_rules('username', "Username", 'username|aplha|is_unique[usuarios.nomeusuario]');
-
+        $this->form_validation->set_rules('username', "Username", 'required|aplha|is_unique[usuarios.username]');
+        
+        /* Verifica se não há erros na validação */
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('cad_usuario');
         } else {
-            echo "cadastra no banco";
+            $dadosBanco = element(array('nomecompleto','email','apartamento', 'telefone', 'username'), $this->input->post());
+            $this->load->model('dashboard_model');
+            $this->dashboard_model->do_insert($dados);      
         }
-
         $this->load->view('includes/footer');
     }
 

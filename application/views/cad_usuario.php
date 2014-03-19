@@ -13,8 +13,8 @@
             /* Nome do Usuário */
             if (form_error('nomecompleto') == TRUE) {
                  echo "<div class=\"form-group has-error\">
-                  <label for=\"nomeuser\">Nome do Usu&aacute;rio</label>";
-                echo form_input(array('name' => 'nomecompleto', 'class' => 'form-control', 'placeholder' => 'Nome do Usuário'), set_value('nomecompleto'), 'autoload');
+                  <label for=\"nomeuser\" for=\"nomecompleto\">Nome do Usu&aacute;rio</label>";
+                echo form_input(array('id' => 'nomecompleto', 'name' => 'nomecompleto', 'class' => 'form-control', 'placeholder' => 'Nome do Usuário'), set_value('nomecompleto'), 'autoload');
                 echo "<p class=\"text-danger\">" . form_error('nomecompleto') . "</p>";
                 echo "</div>";
             } else {
@@ -24,7 +24,7 @@
                 echo "</div>";
             }
 
-
+            
             /* Email */
             if (form_error('email') == TRUE) {
                 echo " <div class=\"form-group has-error\">
@@ -39,7 +39,7 @@
                 echo "</div>";
             }
 
-
+            
             /* Bloco do Usuario */
             echo "<div class=\"form-group\">
                       <label for=\"bloco\">Bloco / Pr&eacute;dio</label>
@@ -64,7 +64,6 @@
                 echo form_input(array('name' => 'apartamento', 'class' => 'form-control', 'placeholder' => 'Numero do Apartamento'), set_value('apartamento'));
                 echo "</div>";
             }
-
 
             /* Telefone */
             if (form_error('telefone') == TRUE) {
@@ -93,17 +92,6 @@
                 echo form_input(array('name' => 'username', 'class' => 'form-control', 'placeholder' => 'Username'), set_value('username'));
                 echo "</div>";
             }
-
-            /* Usuario ativo */
-            echo "<div class=\"form-group\">
-                      <label for=\"userativo\">Usu&aacute;rio ativo?</label>
-                      <fieldset id=\"ativo\" disabled=\"true\">
-                      <select class=\"form-control\">
-                          <option value=\"1\">Sim</option>
-                          <option value=\"0\">N&atilde;o</option>
-                      </select>
-                      </fieldset>
-                  </div>";
 
 
             echo "<div class=\"form-group\">";
