@@ -43,6 +43,10 @@ class Dashboard extends CI_Controller
         $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|is_unique[usuarios.nome]');
         $this->form_validation->set_message('is_unique', 'O %s já existe cadastrado.');
         $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+        $this->form_validation->set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
+        $this->form_validation->set_message('is_unique', 'O %s já existe cadastrado.');
+        $this->form_validation->set_rules('telefone', 'Telefone', 'required|alpha_numeric|');
+        $this->form_validation->set_rules('username', "Username", 'username|aplha|is_unique[usuarios.nomeusuario]');
 
         if ($this->form_validation->run() == FALSE) {
             $this->load->view('cad_usuario');
