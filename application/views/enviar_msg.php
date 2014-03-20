@@ -29,12 +29,12 @@
                     <textarea type="text" rows="8" class="form-control" placeholder="Digite aqui a sua mensagem..." id="msg_texto"></textarea>
                 </div>
 
-
                 <div class="form-group">
                     <button type="button" class="btn btn-primary" >Enviar Mensagem</button>
                 </div>
             </form>
         </div>
-    </div><!-- /.row -->
+    </div>
+    <!-- /.row -->
 
 </div><!-- /#page-wrapper -->
