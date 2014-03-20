@@ -54,6 +54,7 @@
                           <option value=\"B\">Bloco B</option>
                           <option value=\"C\">Bloco C</option>
                           <option value=\"D\">Bloco D</option>
+                          <option value=\"D\">Bloco E</option>
                       </select>
                   </div>";
 
