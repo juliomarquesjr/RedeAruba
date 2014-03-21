@@ -15,14 +15,14 @@
 
     <body background="<?php echo base_url('assets/img/fundo_login.png'); ?>" >
 
-        
+
         <div class="col-md-5 col-md-offset-2">
             <div class="jumbotron">
                 <h1><i class="fa fa-desktop"></i> &nbsp;Aruba Server</h1>
                 <p>Servidor de Rede e Internet. <br />
                     O Acesso ao sistem é restrito. Por favor efetue login.
                 </p><br />
-                <p><a class="btn btn-primary btn-lg" role="button" data-toggle="modal" data-target="#loginModal">Entrar no Sistema</a></p>
+               
             </div>     
 
         </div>
@@ -30,10 +30,18 @@
 
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="myModalLabel">Acesso ao Sistema</h4>
+                    <h4 class="modal-title" id="myModalLabel">Informações</h4>
                 </div>
                 <div class="modal-body">
+
                     <?php
+                    if ($this->session->flashdata('erroLogin') == TRUE) {
+                        echo "<div class=\"alert alert-danger alert-dismissable\">
+                <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
+                <strong>Erro!</strong> Usuário ou Senha inválidos.
+                </div>";
+                    }
+
                     echo form_open('login/verifica', 'role="form"');
 
                     if (form_error('usuario') == TRUE) {
@@ -43,7 +51,7 @@
                         echo "</div>";
                     } else {
                         echo "<div class=\"form-group\"><label>Nome de Usuario</label>";
-                        echo form_input(array('name' => 'usuario', 'class' => 'form-control', 'placeholder' => 'Senha'), set_value('usuario'));
+                        echo form_input(array('name' => 'usuario', 'class' => 'form-control', 'placeholder' => 'Nome de Usuário'), set_value('usuario'));
                         echo "</div>";
                     }
 
@@ -54,7 +62,7 @@
                         echo "</div>";
                     } else {
                         echo "<div class=\"form-group\"><label>Senha</label>";
-                        echo form_password(array('name' => 'senha', 'class' => 'form-control'), '');
+                        echo form_password(array('name' => 'senha', 'class' => 'form-control', 'placeholder' => 'Senha'), '');
                         echo "</div>";
                     }
 

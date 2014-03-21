@@ -1,4 +1,4 @@
-<?php
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 $dados_menu = array(
     'titulo' => "Aruba Server :: Servidor de Internet",
@@ -9,7 +9,8 @@ $dados_menu = array(
     'pg_enviar_msg' => 'dashboard/enviar_msg',
     'pg_cad_dispositivos' => 'dashboard/cad_dispositivos',
     'pg_user_cadastrados' => 'dashboard/rel_usuarios',
-    'pg_envia_cobranca' => 'dashboard/cobranca'
+    'pg_envia_cobranca' => 'dashboard/cobranca',
+    'pg_sair' => 'login'
 );
 
 class Dashboard extends CI_Controller
