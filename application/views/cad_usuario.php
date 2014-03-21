@@ -49,7 +49,7 @@
             /* Bloco do Usuario */
             echo "<div class=\"form-group\">
                       <label name= \"bloco\" for=\"bloco\">Bloco / Pr&eacute;dio</label>
-                      <select multiple class=\"form-control\">
+                      <select class=\"form-control\" name=\"bloco\">
                           <option value=\"A\">Bloco A</option>
                           <option value=\"B\">Bloco B</option>
                           <option value=\"C\">Bloco C</option>

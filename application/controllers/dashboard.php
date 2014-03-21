@@ -14,7 +14,9 @@ $dados_menu = array(
 
 class Dashboard extends CI_Controller
 {
-
+    /*
+     * Contrutor da classe
+     */
     function __construct()
     {
         parent::__construct();
@@ -66,7 +68,7 @@ class Dashboard extends CI_Controller
         } else {
             $dadosBanco = elements(array('nomecompleto', 'email', 'apartamento', 'telefone', 'username', 'senha', 'bloco'), $this->input->post());
             $dadosBanco['senha'] = md5("1234");
-            $this->dashboard_model->do_insert($dadosBanco);
+            $this->dashboard_model->do_insert($dadosBanco, 'usuarios', 'dashboard/cad_user');
         }
         $this->load->view('includes/footer');
     }
@@ -90,12 +92,23 @@ class Dashboard extends CI_Controller
         $dados_menu['titulo_interno'] = 'Enviar Mensagem';
         $dados_menu['sub_titulo_interno'] = '** Envie mensagem entre usuarios da rede.';
         
-        $dadosUsuarios = array('lista_usuarios' => $this->dashboard_model->get_all('usuarios')->result());
-        
-        //Inicializa a view
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
-        $this->load->view('enviar_msg', $dadosUsuarios);
+        
+        $dadosUsuarios = array('lista_usuarios' => $this->dashboard_model->get_all('usuarios')->result());
+        
+        $this->form_validation->set_rules('assunto', 'Assunto', 'required');
+        $this->form_validation->set_rules('msg', 'Mensagem', 'required|trim');
+        
+        if($this->form_validation->run() == FALSE){
+            $this->load->view('enviar_msg', $dadosUsuarios);
+        }
+        else{
+            $dadosBanco = elements(array('usuario', 'assunto', 'msg'), $this->input->post());
+            $this->dashboard_model->do_insert($dadosBanco, 'mensagem', 'dashboard/enviar_msg');
+        }
+        
+                
         $this->load->view('includes/footer');
     }
 

@@ -1,6 +1,6 @@
 <div class="col-lg-10">
     <h2>Rela&ccedil;&atilde;o de Usu&aacute;rios</h2>
-    <table class="table table-bordered table-hover tablesorter" name = "table" id="table">
+    <table class="table table-bordered table-hover tablesorter" id="table" name="table" >
         <thead>
             <tr>
                 <th class="header">ID <i class="fa fa-sort"></i></th>
@@ -18,7 +18,7 @@
         foreach ($lista_usuarios as $linha) {
             echo "<tbody>
                   <tr>
-                    <td>00</td>
+                    <td>" . $linha->id . "</td>
                     <td>" . $linha->nomecompleto . "</td>
                     <td>" . $linha->email . "</td>
                     <td>" . $linha->bloco . "</td>
