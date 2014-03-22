@@ -97,7 +97,10 @@ class Dashboard extends CI_Controller {
 		$dados = $this -> dashboard_model -> get_all('usuarios');
 		//Criar um array de usuarios os o array vindo do banco. (Somente para passar por referencia)
 		$usuarios = array('usuarios' => $dados);
-
+		
+		$this->form_validation->set_rules('nomedispositivo', 'Nome do dispositivo', 'required');
+		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required');
+		
 		if($this->form_validation->run()== FALSE){
 			$this -> load -> view('cad_dispositivos', $usuarios);
 		}
