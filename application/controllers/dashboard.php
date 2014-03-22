@@ -27,7 +27,6 @@ class Dashboard extends CI_Controller
         $this->load->helper('url');
         $this->load->library('session'); //Manipulação variaveis de seção
         $this->load->library('table'); //Manipulação de tabelas
-
         $this->load->model('dashboard_model');
         
     }
@@ -49,12 +48,14 @@ class Dashboard extends CI_Controller
         
         global $dados_menu;
         
-        $dados_menu['titulo_interno'] = 'Incluir Usuário';
-        $dados_menu['sub_titulo_interno'] = '** Cadastro de usuários que utilizam a rede.';
+        $dados_menu['titulo_interno'] = 'Incluir Usuário'; //Seta o titulo interno da oágina
+        $dados_menu['sub_titulo_interno'] = '** Cadastro de usuários que utilizam a rede.'; //Seta o subtitulo interno da página.
 
-        /* Regras de validação do formulario */
+        //Carrega a primeira parte da página
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
+        
+        //Regras de validação
         $this->form_validation->set_rules('nomecompleto', 'Nome do Usuario', 'required|trim|is_unique[usuarios.nomecompleto]');
         $this->form_validation->set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
         $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email|is_unique[usuarios.email]');
@@ -80,10 +81,13 @@ class Dashboard extends CI_Controller
         $dados_menu['titulo_interno'] = 'Incluir Dispositovo';
         $dados_menu['sub_titulo_interno'] = '** Cadastro de dispositivos que utilizarão a rede.';
         
+        //Guarda os valores do banco e armazena em um array
+        $dadosUsuarios = array('lista_usuarios' => $this->dasboard_model->get_all('usuarios')->result());
+        
         //Inicializa a view
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
-        $this->load->view('cad_dispositivos');
+        $this->load->view('cad_dispositivos', $dadosUsuarios);
         $this->load->view('includes/footer');
     }
 
@@ -96,19 +100,22 @@ class Dashboard extends CI_Controller
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
         
+        //Guarda os valores do banco e armazena em um array
         $dadosUsuarios = array('lista_usuarios' => $this->dashboard_model->get_all('usuarios')->result());
         
+        //Regras de validação do formulario
         $this->form_validation->set_rules('assunto', 'Assunto', 'required');
         $this->form_validation->set_rules('msg', 'Mensagem', 'required|trim');
         
+        //Verifica se as validações estão corretas 
         if($this->form_validation->run() == FALSE){
             $this->load->view('enviar_msg', $dadosUsuarios);
         }
         else{
+            //Guarda em um array os elementos vindo por POST
             $dadosBanco = elements(array('usuario', 'assunto', 'msg'), $this->input->post());
-            $this->dashboard_model->do_insert($dadosBanco, 'mensagem', 'dashboard/enviar_msg');
+            $this->dashboard_model->do_insert($dadosBanco, 'mensagem', 'dashboard/enviar_msg'); //
         }
-        
                 
         $this->load->view('includes/footer');
     }
@@ -134,18 +141,19 @@ class Dashboard extends CI_Controller
 
         $this->form_validation->set_rules('valor', 'Valor cobrado', 'required|numeric');
         
+        $listaUsuarios = array('lista_usuarios' => $this->dashboard_model->get_all('usuarios')->result());
+        
         //Inicializa a view
         $this->load->view('includes/reader', $dados_menu);
         $this->load->view('includes/menu_navegacao', $dados_menu);
 
         /* Verifica se a validação passou */
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('cobranca');
+            $this->load->view('cobranca', $listaUsuarios);
         } else {
             echo passsei;
         }
 
         $this->load->view('includes/footer');
     }
-
 }

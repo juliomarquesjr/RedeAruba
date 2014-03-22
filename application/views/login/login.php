@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="author" content="">
 
-        <title>Login</title>
+        <title>Rede Aruba :: Login</title>
         <link rel="icon" type="image/png" href="<?php echo base_url('icon.ico'); ?>">
         <link href="<?php echo base_url('assets/css/bootstrap.css"'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/css/sb-admin.css?'); ?>" rel="stylesheet">   
