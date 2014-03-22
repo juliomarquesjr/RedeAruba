@@ -83,15 +83,15 @@ class Dashboard extends CI_Controller {
 
 	public function cad_dispositivos() {
 		global $dados_menu;
-
-		//Inicializa o Reader da View
-		$this -> load -> view('includes/reader', $dados_menu);
-		//Inicializa o menu da view
-		$this -> load -> view('includes/menu_navegacao', $dados_menu);
-
+		
 		//Inclui os dados interno da página
 		$dados_menu['titulo_interno'] = 'Incluir Dispositovo';
 		$dados_menu['sub_titulo_interno'] = '** Cadastro de dispositivos que utilizarão a rede.';
+		
+		//Inicializa o Reader da View
+		$this -> load -> view('includes/reader', $dados_menu);
+		//Inicializa o menu da view
+		$this -> load -> view('includes/menu_navegacao');
 
 		//Guarda o array de usuarios vindo do banco
 		$dados = $this -> dashboard_model -> get_all('usuarios');
@@ -99,7 +99,8 @@ class Dashboard extends CI_Controller {
 		$usuarios = array('usuarios' => $dados);
 		
 		$this->form_validation->set_rules('nomedispositivo', 'Nome do dispositivo', 'required');
-		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required');
+		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required');	
+		$this->form_validation->set_rules('mac', 'Endereço MAC', 'required');
 		
 		if($this->form_validation->run()== FALSE){
 			$this -> load -> view('cad_dispositivos', $usuarios);

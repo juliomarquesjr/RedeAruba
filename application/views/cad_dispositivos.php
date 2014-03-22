@@ -37,7 +37,7 @@
 					echo "<div class=\"form-group has-error\">
                     <label for=\"ip\">Nome do dispositivo</label>
                     <input name=\"ip\" type=\"text\" class=\"form-control\" placeholder=\"Endereço IP\" value=\"" . set_value('ip') . "\">";
-					echo form_error('nomedispositivo');
+					echo form_error('ip');
 					echo "</div>";
 				} else {
 					echo "<div class=\"form-group \">
@@ -45,12 +45,31 @@
                     <input name=\"ip\" type=\"text\" class=\"form-control\" placeholder=\"Endereço IP\" value=\"" . set_value('ip') . "\">
                     </div>";
 				}
-				?>
 				
-                <div class="form-group">
-                    <label for="assunto">Endere&ccedil;o MAC</label>
-                    <input type="text" class="form-control" placeholder="Endereço MAC" id="mac">
-                </div>
+				
+				if (form_error('ip') == TRUE) {
+					echo "<div class=\"form-group has-error\">
+                    <label for=\"mac\">Nome do dispositivo</label>
+                    <input name=\"mac\" type=\"text\" class=\"form-control\" placeholder=\"Endereço MAC\" value=\"" . set_value('mac') . "\">";
+					echo form_error('mac');
+					echo "</div>";
+				} else {
+					echo "<div class=\"form-group \">
+                    <label for=\"mac\">Nome do dispositivo</label>
+                    <input name=\"mac\" type=\"text\" class=\"form-control\" placeholder=\"Endereço MAC\" value=\"" . set_value('mac') . "\">
+                    </div>";
+				}
+				
+				
+				if(form_error('descricao') == TRUE){
+					
+				}else{
+					
+				}
+				
+				?>
+
+                
                 <div class="form-group">
                     <label for="email">Descri&ccedil;&atilde;o do dispositivo</label>
                     <textarea type="text" rows="8" class="form-control" placeholder="Escreva uma breve descrição do seu dispositivo..." id="descricao"></textarea>
