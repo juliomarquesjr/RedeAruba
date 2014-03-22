@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 21-Mar-2014 às 13:16
+-- Generation Time: 22-Mar-2014 às 13:11
 -- Versão do servidor: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `mensagem` (
   `removida` varchar(1) DEFAULT 'N',
   `dataenvio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `mensagem`
@@ -45,7 +45,8 @@ INSERT INTO `mensagem` (`id`, `usuario`, `assunto`, `msg`, `nova`, `removida`, `
 (1, 1, 'test', 'te', 'S', 'N', '2014-03-21 11:54:34'),
 (2, 1, 'Teste de Mensagem', 'Ola boa noite\r\nVenho através dessa merda mostrar a mensagem.', 'S', 'N', '2014-03-21 11:54:34'),
 (3, 3, 'teste', 'teste', 'S', 'N', '2014-03-21 11:54:34'),
-(4, 3, 'Ultimo Teste', 'Efetuando o ultimo teste, vamos para o login', 'S', 'N', '2014-03-21 11:54:34');
+(4, 3, 'Ultimo Teste', 'Efetuando o ultimo teste, vamos para o login', 'S', 'N', '2014-03-21 11:54:34'),
+(5, 3, 'Teste de assunto', 'Teste de Mensagem', 'S', 'N', '2014-03-21 17:04:10');
 
 -- --------------------------------------------------------
 
