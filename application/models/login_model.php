@@ -7,7 +7,8 @@ class Login_model extends CI_Model{
         $this->db->from('usuarios')->where($where);
        
         $resultado = $this->db->get();
-
+		
+		
         if($resultado->num_rows()> 0){
             redirect('dashboard');
         }else{

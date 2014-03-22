@@ -14,8 +14,8 @@
                 . "<fieldset id=\"ativo\"> "
                 . "<select class=\"form-control\" name=\"usuario\">";
 
-                foreach ($lista_usuarios as $linha) {
-                    echo "<option value=\"" . $linha->id . "\">" . $linha->nomecompleto . "</option>";
+                foreach ($usuarios as $usuario) {
+                    echo "<option value=\"" . $usuario['id']. "\">" . $usuario['nomecompleto'] . "</option>";
                 }
                 echo "</select>
                 </fieldset>
