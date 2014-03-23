@@ -57,7 +57,7 @@
 
                     if (form_error('senha') == TRUE) {
                         echo "<div class=\"form-group has-error\"><label>Senha</label>";
-                        echo form_password(array('name' => 'senha', 'class' => 'form-control'), '');
+                        echo form_password(array('name' => 'senha', 'class' => 'form-control', 'placeholder' => 'Senha'), '');
                         echo form_error('senha');
                         echo "</div>";
                     } else {
