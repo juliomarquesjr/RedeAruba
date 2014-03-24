@@ -1,19 +1,19 @@
 <?php
 
-class Login_model extends CI_Model{
-    
-    public function get_login($dados){
-        $where = "username = '".$dados['usuario']."' AND senha = '".md5($dados['senha'])."'";
-        $this->db->from('usuarios')->where($where);
-       
-        $resultado = $this->db->get();
-		
-		
-        if($resultado->num_rows()> 0){
-            redirect('dashboard');
-        }else{
-            $this->session->set_flashdata('erroLogin', TRUE);
-            redirect('login');
-        }
-    }
+class Login_model extends CI_Model {
+
+	public function buscaUsuarioSenha($dados) {
+
+		//Regras de validação (WHERE do SQL)
+		$this -> db -> where('username', $dados['usuario']);
+		$this -> db -> where('senha', md5($dados['senha']));
+
+		//Efetua consulta no banco retornando a primeira linha encontrada
+		$usuario = $this -> db -> get('usuarios') -> row_array();
+
+		//Retorna o usuario encontrado.
+		return $usuario;
+
+	}
+
 }

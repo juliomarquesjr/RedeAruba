@@ -42,7 +42,7 @@
                 </div>";
                     }
 
-                    echo form_open('login/verifica', 'role="form"');
+                    echo form_open('login', 'role="form"');
 
                     if (form_error('usuario') == TRUE) {
                         echo "<div class=\"form-group has-error\"><label>Nome de Usuario</label>";

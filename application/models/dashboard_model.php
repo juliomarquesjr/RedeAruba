@@ -15,4 +15,9 @@ class Dashboard_model extends CI_Model
     {
         return $this->db->get($tabela)->result_array();
     }
+	
+	public function get_dispositivos(){
+		$sql = "SELECT d.nomedispositivo, d.ip, d.mac, u.nomecompleto FROM dispositivos d, usuarios u WHERE d.usuario = u.id";
+		return $this->db->query($sql)->result_array();
+	}
 }

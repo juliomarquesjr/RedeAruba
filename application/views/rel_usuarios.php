@@ -15,16 +15,16 @@
         </thead>
 
         <?php
-        foreach ($lista_usuarios as $linha) {
+        foreach ($usuarios as $usuario) {
             echo "<tbody>
                   <tr>
-                    <td>" . $linha->id . "</td>
-                    <td>" . $linha->nomecompleto . "</td>
-                    <td>" . $linha->email . "</td>
-                    <td>" . $linha->bloco . "</td>
-                    <td>" . $linha->apartamento . "</td>
-                    <td>" . $linha->telefone . "</td>
-                    <td>" . $linha->username . "</td>
+                    <td>" . $usuario['id']. "</td>
+                    <td>" . $usuario['nomecompleto'] . "</td>
+                    <td>" . $usuario['email']. "</td>
+                    <td>" . $usuario['bloco'] . "</td>
+                    <td>" . $usuario['apartamento'] . "</td>
+                    <td>" . $usuario['telefone'] . "</td>
+                    <td>" . $usuario['username'] . "</td>
                     <td> - </td>
                   </tr>";
         }

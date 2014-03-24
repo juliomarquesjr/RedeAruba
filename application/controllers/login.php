@@ -10,33 +10,40 @@ class Login extends CI_Controller {
 		$this -> load -> library('form_validation');
 		$this -> load -> helper('array');
 		$this -> load -> library('session');
+
+		//Carrega o Model dp login
+		$this -> load -> model('login_model');
 	}
 
 	public function index() {
-		//Carrega o reader da página
-		$this -> load -> view('login/login');
-	}
 
-	public function verifica() {
 		//Regrade de validação do formulario de login
 		$this -> form_validation -> set_rules('usuario', 'Nome Usuário', 'required|trim');
 		$this -> form_validation -> set_rules('senha', 'Senha', 'required');
 
 		/* Verifica se a validação passou, se não haver problemas */
 		if ($this -> form_validation -> run() == TRUE) {
-			
 			//Guarda em array os dados do usuario vindos do formulario de login
 			$dadosConsulta = elements(array('usuario', 'senha'), $this -> input -> post());
-			//Carrega o Model dp login
-			$this -> load -> model('login_model');
-			//Chama função para verificação do usuario e a senha do cliente
-			$this -> login_model -> get_login($dadosConsulta);
+
+			//Busca usuario e senha no banco;
+			$usuario = $this -> login_model -> buscaUsuarioSenha($dadosConsulta);
+
+			if ($usuario) {
+				$this -> session -> userdata('usuarioLogado', $usuario);
+				redirect('dashboard');
+			} else {
+				//Cria uma seção para proxima pagina informando erro no login
+				$this -> session -> set_flashdata('erroLogin', TRUE);
+				$this -> load -> view('login/login');
+			}
 
 		} else {
-			//Havendo problema de validação do formulario 
+			//Havendo problema de validação do formulario
 			$this -> load -> view('login/login');
-			$this -> load -> view('includes/footer');
 		}
+
+		$this -> load -> view('includes/footer');
 	}
 
 }

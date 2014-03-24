@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login');
+$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login', 'pg_rel_dispositivos' => 'dashboard/rel_dispositivos');
 
 class Dashboard extends CI_Controller {
 
@@ -18,10 +18,8 @@ class Dashboard extends CI_Controller {
 
 		//Manipulação variaveis de seção
 		$this -> load -> library('session');
-
 		//Manipulação de tabelas
 		$this -> load -> library('table');
-
 		//Carrega o Model da controler
 		$this -> load -> model('dashboard_model');
 
@@ -31,7 +29,7 @@ class Dashboard extends CI_Controller {
 		global $dados_menu;
 		$dados_menu['titulo_interno'] = 'Página Inicial';
 		$this -> load -> view('includes/reader', $dados_menu);
-		$this -> load -> view('includes/menu_navegacao', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
 		$this -> load -> view('dashboard');
 		$this -> load -> view('includes/footer');
 	}
@@ -99,14 +97,19 @@ class Dashboard extends CI_Controller {
 		$usuarios = array('usuarios' => $dados);
 		
 		$this->form_validation->set_rules('nomedispositivo', 'Nome do dispositivo', 'required');
-		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required');	
-		$this->form_validation->set_rules('mac', 'Endereço MAC', 'required');
+		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required|is_unique[dispositivos.ip]');			
+		$this->form_validation->set_message('is_unique', 'Campo %s, já cadastrado no banco.');
+		$this->form_validation->set_rules('mac', 'Endereço MAC', 'required|is_unique[dispositivos.mac]');
+		$this->form_validation->set_message('is_unique', 'Campo %s, já cadastrado no banco.');
+		
 		
 		if($this->form_validation->run()== FALSE){
 			$this -> load -> view('cad_dispositivos', $usuarios);
 		}
 		else{
-			echo "Função de passei";
+			$dados = elements(array('usuario', 'nomedispositivo', 'ip', 'mac'), $this->input->post());
+			
+			$this->dashboard_model->do_insert($dados, 'dispositivos', 'dashboard/cad_dispositivos');
 		}
 
 		$this -> load -> view('includes/footer');
@@ -141,18 +144,9 @@ class Dashboard extends CI_Controller {
 		$this -> load -> view('includes/footer');
 	}
 
-	public function rel_usuarios() {
-		global $dados_menu;
-
-		//Retorna a consulta com todos os usuarios do banco
-		$array_banco = array('lista_usuarios' => $this -> dashboard_model -> get_all('usuarios') -> result());
-
-		//Inicializa a view
-		$this -> load -> view('includes/reader', $dados_menu);
-		$this -> load -> view('includes/menu_navegacao', $dados_menu);
-		$this -> load -> view('rel_usuarios', $array_banco);
-		$this -> load -> view('includes/footer');
-	}
+	/*
+	 * Controler de envio de cobrança ao usuarios
+	 * */
 
 	public function cobranca() {
 		global $dados_menu;
@@ -165,20 +159,46 @@ class Dashboard extends CI_Controller {
 		//Regras de validação do formulario
 		$this -> form_validation -> set_rules('valor', 'Valor cobrado', 'required|numeric');
 
-		$listaUsuarios = array('lista_usuarios' => $this -> dashboard_model -> get_all('usuarios') -> result());
+		$dadosBanco = array('usuarios' => $this -> dashboard_model -> get_all('usuarios'));
 
 		//Inicializa a view
 		$this -> load -> view('includes/reader', $dados_menu);
-		$this -> load -> view('includes/menu_navegacao', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
 
 		/* Verifica se a validação passou */
 		if ($this -> form_validation -> run() == FALSE) {
-			$this -> load -> view('cobranca', $listaUsuarios);
+			$this -> load -> view('cobranca', $dadosBanco);
 		} else {
 			echo passsei;
 		}
 
 		$this -> load -> view('includes/footer');
+	}
+	
+	public function rel_usuarios() {
+		global $dados_menu;
+
+		//Retorna a consulta com todos os usuarios do banco
+		$dadosBanco = array('usuarios' => $this -> dashboard_model -> get_all('usuarios'));
+
+		//Inicializa a view
+		$this -> load -> view('includes/reader', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
+		$this -> load -> view('rel_usuarios', $dadosBanco);
+		$this -> load -> view('includes/footer');
+	}
+	
+	public function rel_dispositivos(){
+		global $dados_menu;
+		
+		$dadosBanco = array('dispositivos' => $this->dashboard_model -> get_dispositivos());
+		
+		//Inicializa a View
+		$this->load->view('includes/reader', $dados_menu);
+		$this->load->view('includes/menu_navegacao');
+		$this->load->view('rel_dispositivos', $dadosBanco);
+		$this->load->view('includes/footer');
+		
 	}
 
 }

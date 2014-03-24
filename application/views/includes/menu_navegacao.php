@@ -30,7 +30,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-desktop"></i>&nbsp; Dipositivos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url($pg_cad_dispositivos); ?>">Incluir dispositivo </a></li>
-                        <li><a href="#">Dispositivos cadastrados</a></li>
+                        <li><a href="<?php echo base_url($pg_rel_dispositivos); ?>">Dispositivos cadastrados</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
