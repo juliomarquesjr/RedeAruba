@@ -23,7 +23,7 @@ class Sistema extends CI_Controller {
 			redirect('login');
 
 		} else {
-			//Se já estiver logado acesso o menu;
+			//Se já estiver logado acesso o menu
 			redirect('dashboard');
 		}
 	}

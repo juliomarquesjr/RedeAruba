@@ -30,12 +30,14 @@ class Login extends CI_Controller {
 			$usuario = $this -> login_model -> buscaUsuarioSenha($dadosConsulta);
 
 			if ($usuario) {
-				$this -> session -> userdata('usuarioLogado', $usuario);
+				$this -> session -> set_userdata('usuarioLogado', $usuario);
 				redirect('dashboard');
 			} else {
 				//Cria uma seção para proxima pagina informando erro no login
 				$this -> session -> set_flashdata('erroLogin', TRUE);
-				$this -> load -> view('login/login');
+				//Redireciona para o controller login
+				redirect('login');
+				
 			}
 
 		} else {
