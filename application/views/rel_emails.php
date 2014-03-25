@@ -1,12 +1,11 @@
 <div class="col-lg-10">
-    <h2>Rela&ccedil;&atilde;o de Dispositivos</h2>
+    <h2>Caixa de Entrada</h2>
     <table class="table table-bordered table-hover tablesorter" id="table" name="table" >
         <thead>
             <tr>
-                <th class="header">Dispositivo <i class="fa fa-sort"></i></th>
-                <th class="header">Proprietario <i class="fa fa-sort"></i></th>
-                <th class="header">Endereço IP <i class="fa fa-sort"></i></th>
-                <th class="header">Endereço MAC <i class="fa fa-sort"></i></th>
+                <th class="header">Remetente <i class="fa fa-sort"></i></th>
+                <th class="header">Data <i class="fa fa-sort"></i></th>
+                <th class="header">Assunto<i class="fa fa-sort"></i></th>
                 <th class="header">Op&ccedil;&otilde;es <i class="fa fa-sort"></i></th>
             </tr>
         </thead>
@@ -18,8 +17,7 @@
                     <td>" . $dispositivo['nomedispositivo'] . "</td>
                     <td>" . $dispositivo['nomecompleto'] ."</td>
                     <td>" . $dispositivo['ip'] . "</td>
-                    <td>" . $dispositivo['mac'] . "</td>
-                    <td>-</td>
+                    <td> - </td>
                   </tr>";
         }
         ?>

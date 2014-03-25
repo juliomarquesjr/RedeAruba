@@ -80,7 +80,7 @@
                     </ul>
                 </li>
                 <li class="dropdown alerts-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Alerts <span class="badge">3</span> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> Avisos <span class="badge">3</span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Default <span class="label label-default">Default</span></a></li>
                         <li><a href="#">Primary <span class="label label-primary">Primary</span></a></li>
@@ -93,11 +93,14 @@
                     </ul>
                 </li>
                 <li class="dropdown user-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; <?php echo $this->session->userdata('usuarioLogado'); ?> &nbsp;<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; 
+                    	<?php $var = $this->session->userdata['usuarioLogado'];
+						$usuario = $var['nomecompleto'];
+						echo $usuario;
+					 ?> &nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#"><i class="fa fa-user"></i> Profile</a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i> Inbox <span class="badge">7</span></a></li>
-                        <li><a href="#"><i class="fa fa-gear"></i> Settings</a></li>
+                        <li><a href="#"><i class="fa fa-user"></i>&nbsp; Perfil</a></li>
+                        <li><a href="#"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <span class="badge">7</span></a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url($pg_sair)?>"><i class="fa fa-power-off"></i> Log Out</a></li>
                     </ul>

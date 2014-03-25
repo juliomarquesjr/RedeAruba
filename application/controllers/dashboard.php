@@ -10,19 +10,22 @@ class Dashboard extends CI_Controller {
 	 * Contrutor da classe
 	 */
 	function __construct() {
+		global $dados_menu;
+		
 		parent::__construct();
 		$this -> load -> helper('form');
-		$this -> load -> library('form_validation');
 		$this -> load -> helper('array');
 		$this -> load -> helper('url');
+		$this -> load -> library('form_validation');
 
 		//Manipulação variaveis de seção
 		$this -> load -> library('session');
 		//Manipulação de tabelas
 		$this -> load -> library('table');
+		
 		//Carrega o Model da controler
 		$this -> load -> model('dashboard_model');
-
+		
 	}
 
 	public function index() {
@@ -81,11 +84,11 @@ class Dashboard extends CI_Controller {
 
 	public function cad_dispositivos() {
 		global $dados_menu;
-		
+
 		//Inclui os dados interno da página
 		$dados_menu['titulo_interno'] = 'Incluir Dispositovo';
 		$dados_menu['sub_titulo_interno'] = '** Cadastro de dispositivos que utilizarão a rede.';
-		
+
 		//Inicializa o Reader da View
 		$this -> load -> view('includes/reader', $dados_menu);
 		//Inicializa o menu da view
@@ -95,21 +98,19 @@ class Dashboard extends CI_Controller {
 		$dados = $this -> dashboard_model -> get_all('usuarios');
 		//Criar um array de usuarios os o array vindo do banco. (Somente para passar por referencia)
 		$usuarios = array('usuarios' => $dados);
-		
-		$this->form_validation->set_rules('nomedispositivo', 'Nome do dispositivo', 'required');
-		$this->form_validation->set_rules('ip', 'Endereço de IP', 'required|is_unique[dispositivos.ip]');			
-		$this->form_validation->set_message('is_unique', 'Campo %s, já cadastrado no banco.');
-		$this->form_validation->set_rules('mac', 'Endereço MAC', 'required|is_unique[dispositivos.mac]');
-		$this->form_validation->set_message('is_unique', 'Campo %s, já cadastrado no banco.');
-		
-		
-		if($this->form_validation->run()== FALSE){
+
+		$this -> form_validation -> set_rules('nomedispositivo', 'Nome do dispositivo', 'required');
+		$this -> form_validation -> set_rules('ip', 'Endereço de IP', 'required|is_unique[dispositivos.ip]');
+		$this -> form_validation -> set_message('is_unique', 'Campo %s, já cadastrado no banco.');
+		$this -> form_validation -> set_rules('mac', 'Endereço MAC', 'required|is_unique[dispositivos.mac]');
+		$this -> form_validation -> set_message('is_unique', 'Campo %s, já cadastrado no banco.');
+
+		if ($this -> form_validation -> run() == FALSE) {
 			$this -> load -> view('cad_dispositivos', $usuarios);
-		}
-		else{
-			$dados = elements(array('usuario', 'nomedispositivo', 'ip', 'mac'), $this->input->post());
-			
-			$this->dashboard_model->do_insert($dados, 'dispositivos', 'dashboard/cad_dispositivos');
+		} else {
+			$dados = elements(array('usuario', 'nomedispositivo', 'ip', 'mac'), $this -> input -> post());
+
+			$this -> dashboard_model -> do_insert($dados, 'dispositivos', 'dashboard/cad_dispositivos');
 		}
 
 		$this -> load -> view('includes/footer');
@@ -174,7 +175,7 @@ class Dashboard extends CI_Controller {
 
 		$this -> load -> view('includes/footer');
 	}
-	
+
 	public function rel_usuarios() {
 		global $dados_menu;
 
@@ -187,18 +188,22 @@ class Dashboard extends CI_Controller {
 		$this -> load -> view('rel_usuarios', $dadosBanco);
 		$this -> load -> view('includes/footer');
 	}
-	
-	public function rel_dispositivos(){
+
+	public function rel_dispositivos() {
 		global $dados_menu;
-		
-		$dadosBanco = array('dispositivos' => $this->dashboard_model -> get_dispositivos());
-		
+
+		$dadosBanco = array('dispositivos' => $this -> dashboard_model -> get_dispositivos());
+
 		//Inicializa a View
-		$this->load->view('includes/reader', $dados_menu);
-		$this->load->view('includes/menu_navegacao');
-		$this->load->view('rel_dispositivos', $dadosBanco);
-		$this->load->view('includes/footer');
-		
+		$this -> load -> view('includes/reader', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
+		$this -> load -> view('rel_dispositivos', $dadosBanco);
+		$this -> load -> view('includes/footer');
+
+	}
+
+	public function caixa_entrada() {
+
 	}
 
 }

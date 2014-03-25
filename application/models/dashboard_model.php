@@ -20,4 +20,9 @@ class Dashboard_model extends CI_Model
 		$sql = "SELECT d.nomedispositivo, d.ip, d.mac, u.nomecompleto FROM dispositivos d, usuarios u WHERE d.usuario = u.id";
 		return $this->db->query($sql)->result_array();
 	}
+	
+	public function get_caixaEntrada(){
+		$sql = "SELECT d.nomedispositivo, d.ip, d.mac, u.nomecompleto FROM dispositivos d, usuarios u WHERE d.usuario = u.id";
+		return $this->db->query($sql)->result_array();
+	}
 }
