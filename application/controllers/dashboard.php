@@ -55,20 +55,30 @@ class Dashboard extends CI_Controller {
         $this -> load -> view('includes/menu_navegacao');
 
         //Regras de validação
-        $this -> form_validation -> set_rules('nomecompleto', 'Nome do Usuario', 'required|trim|is_unique[usuarios.nomecompleto]');
-        $this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
-        $this -> form_validation -> set_rules('email', 'E-mail', 'required|valid_email|is_unique[usuarios.email]');
-        $this -> form_validation -> set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
-        $this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
+        if ($id) {
+            $this -> form_validation -> set_rules('nomecompleto', 'Nome do Usuario', 'required|trim');
+            $this -> form_validation -> set_rules('email', 'E-mail', 'required|valid_email]');
+            $this -> form_validation -> set_rules('apartamento', 'Apartamento', 'required|alpha_numeric');
+            $this -> form_validation -> set_rules('username', "Username", 'required|aplha');
+            $this -> form_validation -> set_rules('bloco', "Bloco", 'required');
+        } else {
+            $this -> form_validation -> set_rules('nomecompleto', 'Nome do Usuario', 'required|trim|is_unique[usuarios.nomecompleto]');
+            $this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
+            $this -> form_validation -> set_rules('email', 'E-mail', 'required|valid_email|is_unique[usuarios.email]');
+            $this -> form_validation -> set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
+            $this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
+            $this -> form_validation -> set_rules('username', "Username", 'required|aplha|is_unique[usuarios.username]');
+            $this -> form_validation -> set_rules('bloco', "Bloco", 'required');
+        }
+
         $this -> form_validation -> set_rules('telefone', 'Telefone', 'required|alpha_numeric|');
-        $this -> form_validation -> set_rules('username', "Username", 'required|aplha|is_unique[usuarios.username]');
 
         /* Verifica se não há erros na validação */
         if ($this -> form_validation -> run() == FALSE) {
-    
+
             if ($id) {
                 $dados = $this -> dashboard_model -> getClientes($id);
-            } 
+            }
         } else {
             //Cria array com dados do post.
             $dadosBanco = elements(array('nomecompleto', 'email', 'apartamento', 'telefone', 'username', 'senha', 'bloco'), $this -> input -> post());
@@ -195,6 +205,11 @@ class Dashboard extends CI_Controller {
 
     public function rel_dispositivos() {
         global $dados_menu;
+
+        //Seta o titulo interno da página
+        $dados_menu['titulo_interno'] = 'Relação de Usuários';
+        //Seta o menu da página
+        $dados_menu['sub_titulo_interno'] = '** Lista de usuários ativos no sistema.';
 
         $dadosBanco = array('dispositivos' => $this -> dashboard_model -> get_dispositivos());
 

@@ -31,5 +31,4 @@ class Dashboard_model extends CI_Model
         return $this->db->get_where('usuarios', array('id' => $id))->row_array();
         
     }
-    
 }

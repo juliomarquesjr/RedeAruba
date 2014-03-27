@@ -1,5 +1,19 @@
+<div id="page-wrapper">
+
+    <div class="row">
+        <div class="col-lg-12">
+            <h1><?php echo $titulo_interno ?> <small><?php echo $sub_titulo_interno; ?></small></h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i><a href="<?php echo base_url($pg_ini); ?>"> Dashboard</a> / <?php echo $titulo_interno; ?></li>
+
+            </ol>
+            </div>
+            </div>
+            
+            
+<div class="row">
 <div class="col-lg-10">
-    <h2>Rela&ccedil;&atilde;o de Usu&aacute;rios</h2>
+    
     <table class="table table-bordered table-hover tablesorter" id="table" name="table" >
         <thead>
             <tr>
@@ -18,17 +32,20 @@
         foreach ($usuarios as $usuario) {
             echo "<tbody>
                   <tr>
-                    <td>" . $usuario['id']. "</td>
+                    <td>" . $usuario['id'] . "</td>
                     <td>" . $usuario['nomecompleto'] . "</td>
-                    <td>" . $usuario['email']. "</td>
+                    <td>" . $usuario['email'] . "</td>
                     <td>" . $usuario['bloco'] . "</td>
                     <td>" . $usuario['apartamento'] . "</td>
                     <td>" . $usuario['telefone'] . "</td>
                     <td>" . $usuario['username'] . "</td>
-                    <td> - </td>
+                    <td align=\"center\"><a href=\"" . base_url('dashboard/cad_user/' . $usuario['id']) . "\"><i class=\"fa fa-edit\"></i></a>&nbsp;<i class=\"fa fa-trash-o\"</td>
                   </tr>";
         }
         ?>
         </tbody>
+        
     </table>
+</div>
+</div>
 </div>
