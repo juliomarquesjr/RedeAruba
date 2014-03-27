@@ -16,7 +16,6 @@
                 <strong>Sucesso!</strong> Usuário cadastrado com sucesso.
                 </div>";
             endif;
-            
             /* Nome do Usuário */
             if (form_error('nomecompleto') == TRUE) {
                  echo "<div class=\"form-group has-error\">
