@@ -46,7 +46,7 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown messages-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <span class="badge"><?php echo $novas_mensagens; ?></span> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header"><?php echo $novas_mensagens; ?> Nova(s) Mensagen(s)</li>
                         <li class="message-preview">
@@ -76,7 +76,7 @@
                             </a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <span class="badge">7</span></a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?></a></li>
                     </ul>
                 </li>
                 <li class="dropdown alerts-dropdown">
@@ -100,7 +100,7 @@
 					 ?> &nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-user"></i>&nbsp; Perfil</a></li>
-                        <li><a href="#"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <span class="badge">7</span></a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?></a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url($pg_sair)?>"><i class="fa fa-power-off"></i> Log Out</a></li>
                     </ul>

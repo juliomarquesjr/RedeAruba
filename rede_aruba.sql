@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.9
+-- version 4.1.6
 -- http://www.phpmyadmin.net
 --
--- Máquina: 127.0.0.1
--- Data de Criação: 28-Mar-2014 às 03:14
--- Versão do servidor: 5.6.14
--- versão do PHP: 5.5.6
+-- Host: 127.0.0.1
+-- Generation Time: 28-Mar-2014 às 23:31
+-- Versão do servidor: 5.6.16
+-- PHP Version: 5.5.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- Base de Dados: `rede_aruba`
+-- Database: `rede_aruba`
 --
 
 -- --------------------------------------------------------
@@ -56,22 +56,21 @@ INSERT INTO `dispositivos` (`id`, `usuario`, `nomedispositivo`, `ip`, `mac`, `da
 CREATE TABLE IF NOT EXISTS `mensagem` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `usuario` int(11) NOT NULL,
+  `remetente` int(11) NOT NULL,
   `assunto` varchar(30) NOT NULL,
+  `data_envio` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `msg` text NOT NULL,
   `nova` varchar(1) DEFAULT 'S',
   `removida` varchar(1) DEFAULT 'N',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `mensagem`
 --
 
-INSERT INTO `mensagem` (`id`, `usuario`, `assunto`, `msg`, `nova`, `removida`) VALUES
-(1, 1, 'test', 'te', 'S', 'N'),
-(2, 1, 'Teste de Mensagem', 'Ola boa noite\r\nVenho através dessa merda mostrar a mensagem.', 'S', 'N'),
-(3, 3, 'teste', 'teste', 'S', 'N'),
-(4, 3, 'Ultimo Teste', 'Efetuando o ultimo teste, vamos para o login', 'S', 'N');
+INSERT INTO `mensagem` (`id`, `usuario`, `remetente`, `assunto`, `data_envio`, `msg`, `nova`, `removida`) VALUES
+(5, 3, 1, 'Teste', '2014-03-28 10:11:26', 'Julio teste', 'S', 'N');
 
 -- --------------------------------------------------------
 
