@@ -11,12 +11,12 @@
         </thead>
 
         <?php
-        foreach ($dispositivos as $dispositivo) {
+        foreach ($emails as $email) {
             echo "<tbody>
                   <tr>
-                    <td>" . $dispositivo['nomedispositivo'] . "</td>
-                    <td>" . $dispositivo['nomecompleto'] ."</td>
-                    <td>" . $dispositivo['ip'] . "</td>
+                    <td>" . $email['nomecompleto'] . "</td>
+                    <td>" . $email['data_envio'] ."</td>
+                    <td>" . $email['assunto'] . "</td>
                     <td> - </td>
                   </tr>";
         }

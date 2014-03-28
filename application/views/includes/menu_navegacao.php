@@ -23,7 +23,7 @@
                         <li><a href=" <?php echo base_url($pg_cad_usr); ?> ">Incluir usu&aacute;rio</a></li>
                         <li><a href="<?php echo base_url($pg_user_cadastrados); ?>">Rela&ccedil;&atilde;o de usu&aacute;rios</a></li>
                         <li><a href="<?php echo base_url($pg_enviar_msg); ?>">Enviar mensagem</a></li>
-                        <li><a href="#"><i class="icon-inbox"></i> Caixa de entrada</a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada)?>"> Caixa de entrada</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
