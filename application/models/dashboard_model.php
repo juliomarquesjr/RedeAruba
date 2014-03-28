@@ -30,11 +30,19 @@ class Dashboard_model extends CI_Model {
 	 * Função para buscar a caixa de entrada dos emails
 	 * Recebe o ID do usuario logado e retorna os dados encontrado no banco.
 	 */
-	public function get_caixaEntrada($idLogado) {
+	public function get_caixaEntrada($usuarios) {
 
-		$sql = "SELECT u.nomecompleto, m.assunto, m.data_envio FROM mensagem m, usuarios u WHERE m.usuario = u.id AND m.removida = 'N' AND m.usuario = '" . $idLogado['id'] . "' ";
+		$sql = "SELECT u.nomecompleto, m.assunto, m.data_envio FROM mensagem m, usuarios u WHERE m.remetente = u.id AND m.removida = 'N' AND m.usuario = '" . $usuarios['id'] . "' ";
 		return $this -> db -> query($sql) -> result_array();
+	}
 
+	public function get_quantidadeNovasMensagens($usuario) {
+		$this -> db -> where('usuario', $usuario['id']);
+		$this -> db -> where('nova', 'S');
+
+		$this -> db -> from('mensagem');
+
+		return $this -> db -> count_all_results();
 	}
 
 	/*

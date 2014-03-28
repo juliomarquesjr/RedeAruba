@@ -46,9 +46,9 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown messages-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <span class="badge">7</span> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <span class="badge"><?php echo $novas_mensagens; ?></span> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="dropdown-header">7 New Messages</li>
+                        <li class="dropdown-header"><?php echo $novas_mensagens; ?> Nova(s) Mensagen(s)</li>
                         <li class="message-preview">
                             <a href="#">
                                 <span class="avatar"><img src="http://placehold.it/50x50"></span>
@@ -76,7 +76,7 @@
                             </a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#">View Inbox <span class="badge">7</span></a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <span class="badge">7</span></a></li>
                     </ul>
                 </li>
                 <li class="dropdown alerts-dropdown">
