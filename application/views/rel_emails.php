@@ -1,5 +1,15 @@
+ <div id="page-wrapper">
+ <div class="row">
+        <div class="col-lg-12">
+            <h1><?php echo $titulo_interno ?> <small><?php echo $sub_titulo_interno; ?></small></h1>
+            <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i><a href="<?php echo base_url($pg_ini); ?>"> Dashboard</a> / <?php echo $titulo_interno; ?></li>
+
+            </ol>
+            </div>
+            </div>
+
 <div class="col-lg-10">
-    <h2>Caixa de Entrada</h2>
     <table class="table table-bordered table-hover tablesorter" id="table" name="table" >
         <thead>
             <tr>
@@ -25,4 +35,4 @@
         ?>
         </tbody>
     </table>
-</div>
+</div></div>

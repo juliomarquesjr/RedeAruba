@@ -238,9 +238,9 @@ class Dashboard extends CI_Controller {
 		global $dados_menu;
 
 		//Seta o titulo interno da página
-		$dados_menu['titulo_interno'] = 'Relação de Usuários';
+		$dados_menu['titulo_interno'] = 'Relação de Dispositivos';
 		//Seta o menu da página
-		$dados_menu['sub_titulo_interno'] = '** Lista de usuários ativos no sistema.';
+		$dados_menu['sub_titulo_interno'] = '** Lista de dispositivos cadastrados por usuários.';
 
 		$dadosBanco = array('dispositivos' => $this -> dashboard_model -> get_dispositivos());
 
@@ -256,9 +256,9 @@ class Dashboard extends CI_Controller {
 		global $dados_menu;
 
 		//Seta o titulo interno da página
-		$dados_menu['titulo_interno'] = 'Relação de Usuários';
+		$dados_menu['titulo_interno'] = 'Caixa de Entrada';
 		//Seta o menu da página
-		$dados_menu['sub_titulo_interno'] = '** Lista de usuários ativos no sistema.';
+		$dados_menu['sub_titulo_interno'] = '** Emails recebidos de outros usuários.';
 		$this -> load -> view('includes/reader', $dados_menu);
 		$this -> load -> view('includes/menu_navegacao');
 
@@ -266,7 +266,7 @@ class Dashboard extends CI_Controller {
 
 		$this -> load -> view('rel_emails', $dadosBanco);
 		$this -> load -> view('includes/footer');
-
+	
 	}
 
 	/**
