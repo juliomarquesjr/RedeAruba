@@ -31,7 +31,7 @@ class Dashboard_model extends CI_Model {
 	 * Recebe o ID do usuario logado e retorna os dados encontrado no banco.
 	 */
 	public function get_caixaEntrada($usuarios) {
-		$sql = "SELECT u.nomecompleto, m.assunto, m.data_envio, m.id FROM mensagem m, usuarios u WHERE m.remetente = u.id AND m.removida = 'N' AND m.usuario = '" . $usuarios['id'] . "' ";
+		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id FROM mensagem m, usuarios u WHERE m.remetente = u.id AND m.removida = 'N' AND m.usuario = '" . $usuarios['id'] . "' ";
 		return $this -> db -> query($sql) -> result_array();
 	}
 
@@ -67,9 +67,17 @@ class Dashboard_model extends CI_Model {
 	 * Recebendo o id do email
 	 */
 	public function abrirEmail($id) {
-		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id, m.msg FROM mensagem m, usuarios u WHERE u.id = m.remetente AND m.id = '".$id ."' ";	
-		return $this -> db -> query($sql)->row_array();
-		
+		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id, m.msg FROM mensagem m, usuarios u WHERE u.id = m.remetente AND m.id = '" . $id . "' ";
+		return $this -> db -> query($sql) -> row_array();
+
+	}
+
+	public function removerEmail($id = NULL) {
+
+		if ($id) {
+			$this -> db -> where('id', $id);
+			$this -> db -> update('mensagem', array('removida' => 'S', 'nova' => 'N'));
+		}
 	}
 
 }

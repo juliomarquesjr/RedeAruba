@@ -218,7 +218,12 @@ class Dashboard extends CI_Controller {
 
 	public function rel_usuarios() {
 		global $dados_menu;
-
+		
+		//Seta o titulo interno da página
+		$dados_menu['titulo_interno'] = 'Relação de Usuários';
+		//Seta o menu da página
+		$dados_menu['sub_titulo_interno'] = '** Lista de usuarios que utilizam a rede';
+		
 		//Retorna a consulta com todos os usuarios do banco
 		$dadosBanco = array('usuarios' => $this -> dashboard_model -> get_all('usuarios'));
 
@@ -264,17 +269,33 @@ class Dashboard extends CI_Controller {
 
 	}
 
+	/**
+	 * Função para exibir o email selecionado pelo usuario
+	 * Recebe o ID da mensagem.
+	 */
 	public function abrirEmail($id) {
 		global $dados_menu;
 		$mensagem = array('mensagem' => NULL);
-		$mensagem['mensagem'] = $this->dashboard_model->abrirEmail($id);
-		
+		$mensagem['mensagem'] = $this -> dashboard_model -> abrirEmail($id);
+
 		$this -> load -> view('includes/reader', $dados_menu);
 		$this -> load -> view('includes/menu_navegacao');
 
 		$this -> load -> view('exibir_email', $mensagem);
-		
+
 		$this -> load -> view('includes/footer');
+	}
+
+	/**
+	 * Função para remover o email selecionado pelo usuario
+	 * Recebe o ID do email.
+	 */
+	public function apagarEmail($id) {
+		if ($id) {
+			$this -> dashboard_model -> removerEmail($id);
+			redirect('dashboard/caixa_entrada');
+
+		}
 	}
 
 }
