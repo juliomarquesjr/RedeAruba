@@ -17,7 +17,8 @@
                     <td>" . $email['nomecompleto'] . "</td>
                     <td>" . $email['data_envio'] ."</td>
                     <td>" . $email['assunto'] . "</td>
-                    <td> - </td>
+                    <td align=\"center\"><a href=\"abrirEmail/".$email['id'] ." \"><i class=\"fa fa-file-o\"></i></a>&nbsp 
+                    <i class=\"fa fa-trash-o\"></i></td>
                   </tr>";
         }
         ?>

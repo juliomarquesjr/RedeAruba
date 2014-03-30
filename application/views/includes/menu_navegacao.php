@@ -10,20 +10,20 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href= "<?php echo base_url($pg_ini);?>"  >Rede Aruba - Adminitra&ccedil;&atilde;o do Servidor</a>
+            <a class="navbar-brand" href= "<?php echo base_url($pg_ini); ?>"  >Rede Aruba - Adminitra&ccedil;&atilde;o do Servidor</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav side-nav">
-                <li><a href="<?php echo base_url($pg_ini);?>" ><i class="fa fa-dashboard"></i>&nbsp; Dashboard</a></li>
+                <li><a href="<?php echo base_url($pg_ini); ?>" ><i class="fa fa-dashboard"></i>&nbsp; Dashboard</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; Usu&aacute;rios <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href=" <?php echo base_url($pg_cad_usr); ?> ">Incluir usu&aacute;rio</a></li>
+                        <li><a href="<?php echo base_url($pg_cad_usr); ?> ">Incluir usu&aacute;rio</a></li>
                         <li><a href="<?php echo base_url($pg_user_cadastrados); ?>">Rela&ccedil;&atilde;o de usu&aacute;rios</a></li>
                         <li><a href="<?php echo base_url($pg_enviar_msg); ?>">Enviar mensagem</a></li>
-                        <li><a href="<?php echo base_url($pg_caixa_entrada)?>"> Caixa de entrada</a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>"> Caixa de entrada</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -36,7 +36,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i>&nbsp; Pagamentos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="<?php echo base_url($pg_envia_cobranca);?>">Enviar cobrança </a></li>
+                        <li><a href="<?php echo base_url($pg_envia_cobranca); ?>">Enviar cobrança </a></li>
                         <li><a href="#">Debitar pagamento </a></li>
                         <li><a href="#">Rela&ccedil;&atilde;o de pagamentos</a></li>
                     </ul>
@@ -46,12 +46,24 @@
 
             <ul class="nav navbar-nav navbar-right navbar-user">
                 <li class="dropdown messages-dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> Mensagens <?php
+					if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
+					}
+				?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header"><?php echo $novas_mensagens; ?> Nova(s) Mensagen(s)</li>
                         <li class="message-preview">
                             <a href="#">
-                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
+                                <span class="name">aqui<?php print_r($mensagens); ?></span>
+                                <span class="message">Hey there, I wanted to ask you something...</span>
+                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
+                            </a>
+                        </li>
+                        <li class="divider"></li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
                                 <span class="name">John Smith:</span>
                                 <span class="message">Hey there, I wanted to ask you something...</span>
                                 <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
@@ -60,23 +72,17 @@
                         <li class="divider"></li>
                         <li class="message-preview">
                             <a href="#">
-                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
+                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
                                 <span class="name">John Smith:</span>
                                 <span class="message">Hey there, I wanted to ask you something...</span>
                                 <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
                             </a>
                         </li>
                         <li class="divider"></li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <span class="avatar"><img src="http://placehold.it/50x50"></span>
-                                <span class="name">John Smith:</span>
-                                <span class="message">Hey there, I wanted to ask you something...</span>
-                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?></a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <?php
+							if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
+							}
+						?></a></li>
                     </ul>
                 </li>
                 <li class="dropdown alerts-dropdown">
@@ -94,13 +100,16 @@
                 </li>
                 <li class="dropdown user-dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp; 
-                    	<?php $var = $this->session->userdata['usuarioLogado'];
+                    	<?php $var = $this -> session -> userdata['usuarioLogado'];
 						$usuario = $var['nomecompleto'];
 						echo $usuario;
 					 ?> &nbsp;<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-user"></i>&nbsp; Perfil</a></li>
-                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <?php if($novas_mensagens > 0) { echo "<span class=\"badge\">". $novas_mensagens ."</span>"; }?></a></li>
+                        <li><a href="<?php echo base_url($pg_caixa_entrada); ?>"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <?php
+							if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
+							}
+						?></a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url($pg_sair)?>"><i class="fa fa-power-off"></i> Log Out</a></li>
                     </ul>

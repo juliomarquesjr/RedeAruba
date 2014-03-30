@@ -2,8 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'novas_mensagens' => '0', 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login', 'pg_rel_dispositivos' => 'dashboard/rel_dispositivos', 'pg_caixa_entrada' => 'dashboard/caixa_entrada' );
-
+$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'novas_mensagens' => '0', 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login', 'pg_rel_dispositivos' => 'dashboard/rel_dispositivos', 'pg_caixa_entrada' => 'dashboard/caixa_entrada');
 class Dashboard extends CI_Controller {
 
 	/*
@@ -25,20 +24,20 @@ class Dashboard extends CI_Controller {
 
 		//Carrega o Model da controler
 		$this -> load -> model('dashboard_model');
-		
-		
-	//Carrega o numero de mensagens novas
-	$numero = $this->dashboard_model->get_quantidadeNovasMensagens($this->session->userdata('usuarioLogado' ));
-		if($numero){
-		$dados_menu['novas_mensagens'] = $numero;
+
+		//Carrega o numero de mensagens novas
+		$numero = $this -> dashboard_model -> get_quantidadeNovasMensagens($this -> session -> userdata('usuarioLogado'));
+		if ($numero) {
+			$dados_menu['novas_mensagens'] = $numero;
 		}
 
-		}
+		//$mensagens = $this -> dashboard_model -> mostraMsgMenu($this -> session -> userdata('usuarioLogado'));
 
-		public function index() {
+	}
+
+	public function index() {
 		global $dados_menu;
-		$dados_menu[
-	'titulo_interno'] = 'Página Inicial';
+		$dados_menu['titulo_interno'] = 'Página Inicial';
 		$this -> load -> view('includes/reader', $dados_menu);
 		$this -> load -> view('includes/menu_navegacao');
 		$this -> load -> view('dashboard');
@@ -160,13 +159,29 @@ class Dashboard extends CI_Controller {
 		} else {
 			//Guarda em um array os elementos vindo por POST
 			$dadosBanco = elements(array('usuario', 'assunto', 'msg', 'remetente'), $this -> input -> post());
-			$idUsuario = $this->session->userdata('usuarioLogado');
-			
+			$idUsuario = $this -> session -> userdata('usuarioLogado');
+
 			$dadosBanco['remetente'] = $idUsuario['id'];
 			$this -> dashboard_model -> do_insert($dadosBanco, 'mensagem', 'dashboard/enviar_msg');
-			
+
 		}
 
+		$this -> load -> view('includes/footer');
+	}
+
+	/**
+	 * Função para exibir o email selecionado pelo usuario
+	 * Recebendo o id do email
+	 */
+
+	public function exibir_mensagem($id) {
+		global $dados_menu;
+		$dados_menu['titulo_interno'] = 'Exibir Email';
+		$dados_menu['sub_titulo_interno'] = '** Visualiza mensagem selecionada.';
+
+		$this -> load -> view('includes/reader', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
+		$this -> load -> view('exibir_email');
 		$this -> load -> view('includes/footer');
 	}
 
@@ -234,19 +249,32 @@ class Dashboard extends CI_Controller {
 
 	public function caixa_entrada() {
 		global $dados_menu;
-		
+
 		//Seta o titulo interno da página
 		$dados_menu['titulo_interno'] = 'Relação de Usuários';
 		//Seta o menu da página
 		$dados_menu['sub_titulo_interno'] = '** Lista de usuários ativos no sistema.';
 		$this -> load -> view('includes/reader', $dados_menu);
 		$this -> load -> view('includes/menu_navegacao');
-		
-		$dadosBanco = array('emails' => $this->dashboard_model->get_caixaEntrada($this->session->userdata('usuarioLogado')));
-		
-		$this->load->view('rel_emails', $dadosBanco);
+
+		$dadosBanco = array('emails' => $this -> dashboard_model -> get_caixaEntrada($this -> session -> userdata('usuarioLogado')));
+
+		$this -> load -> view('rel_emails', $dadosBanco);
 		$this -> load -> view('includes/footer');
+
+	}
+
+	public function abrirEmail($id) {
+		global $dados_menu;
+		$mensagem = array('mensagem' => NULL);
+		$mensagem['mensagem'] = $this->dashboard_model->abrirEmail($id);
 		
+		$this -> load -> view('includes/reader', $dados_menu);
+		$this -> load -> view('includes/menu_navegacao');
+
+		$this -> load -> view('exibir_email', $mensagem);
+		
+		$this -> load -> view('includes/footer');
 	}
 
 }
