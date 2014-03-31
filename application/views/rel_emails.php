@@ -4,35 +4,41 @@
             <h1><?php echo $titulo_interno ?> <small><?php echo $sub_titulo_interno; ?></small></h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i><a href="<?php echo base_url($pg_ini); ?>"> Dashboard</a> / <?php echo $titulo_interno; ?></li>
-
             </ol>
             </div>
             </div>
 
 <div class="col-lg-10">
-    <table class="table table-bordered table-hover tablesorter" id="table" name="table" >
+	<?php
+
+	if ($emails) {
+		echo "
+    <table class=\"table table-bordered table-hover tablesorter\" id=\"table\" name=\"table\" >
         <thead>
             <tr>
-                <th class="header">Remetente <i class="fa fa-sort"></i></th>
-                <th class="header">Data <i class="fa fa-sort"></i></th>
-                <th class="header">Assunto<i class="fa fa-sort"></i></th>
-                <th class="header">Op&ccedil;&otilde;es <i class="fa fa-sort"></i></th>
+                <th class=\"header\">Remetente <i class=\"fa fa-sort\"></i></th>
+                <th class=\"header\">Data <i class=\"fa fa-sort\"></i></th>
+                <th class=\"header\">Assunto<i class=\"fa fa-sort\"></i></th>
+                <th class=\"header\">Op&ccedil;&otilde;es <i class=\"fa fa-sort\"></i></th>
             </tr>
-        </thead>
+        </thead>";
 
-        <?php
-        foreach ($emails as $email) {
-            echo "<tbody>
+		foreach ($emails as $email) {
+			echo "<tbody>
                   <tr>
                     <td>" . $email['nomecompleto'] . "</td>
-                    <td>" . $email['data_envio'] ."</td>
+                    <td>" . $email['data_envio'] . "</td>
                     <td>" . $email['assunto'] . "</td>
                     <td align=\"center\">
-                    <a href=\"". base_url('dashboard/abrirEmail/'. $email['id']) ."\"><i class=\"fa fa-file-o\"></i></a>&nbsp 
-                    <a href=\"". base_url('dashboard/apagarEmail/'. $email['id']) ."\"> <i class=\"fa fa-trash-o\"></i></td>
+                    <a href=\"" . base_url('dashboard/abrirEmail/' . $email['id']) . "\"><i class=\"fa fa-file-o\"></i></a>&nbsp 
+                    <a href=\"" . base_url('dashboard/apagarEmail/' . $email['id']) . "\"> <i class=\"fa fa-trash-o\"></i></td>
                   </tr>";
-        }
-        ?>
-        </tbody>
-    </table>
+		}
+
+		echo "</tbody>
+    </table>";
+	} else {
+		echo "<h3 align=\"center\">Não há emails na caixa de entrada</h3>";
+	}
+    ?>
 </div></div>

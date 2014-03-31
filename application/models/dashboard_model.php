@@ -55,10 +55,8 @@ class Dashboard_model extends CI_Model {
 	 * Recebendo por parametro as dados do usuario logado.
 	 */
 	public function mostraMsgMenu($usuario) {
-		$this -> db -> where('usuario', $usuario['id']);
-		$this -> db -> where('nova', 'S');
-
-		return $this -> db -> get('mensagem') -> result_array();
+		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id FROM mensagem m, usuarios u WHERE m.remetente = u.id AND m.removida = 'N' AND m.nova = 'S' AND m.usuario = '" . $usuario['id'] . "'";
+		return $this -> db -> query($sql) -> result_array();
 
 	}
 
@@ -67,6 +65,9 @@ class Dashboard_model extends CI_Model {
 	 * Recebendo o id do email
 	 */
 	public function abrirEmail($id) {
+		$sql = "UPDATE mensagem SET nova = 'N' WHERE id = " . $id . ";";
+		$this -> db -> query($sql);
+		
 		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id, m.msg FROM mensagem m, usuarios u WHERE u.id = m.remetente AND m.id = '" . $id . "' ";
 		return $this -> db -> query($sql) -> row_array();
 

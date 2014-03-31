@@ -52,36 +52,26 @@
 				?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li class="dropdown-header"><?php echo $novas_mensagens; ?> Nova(s) Mensagen(s)</li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
-                                <span class="name">aqui<?php print_r($mensagens); ?></span>
-                                <span class="message">Hey there, I wanted to ask you something...</span>
-                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
-                                <span class="name">John Smith:</span>
-                                <span class="message">Hey there, I wanted to ask you something...</span>
-                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                            </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li class="message-preview">
-                            <a href="#">
-                                <span class="avatar"><img src="<?php echo base_url('assets/img/email2.png'); ?>"></span>
-                                <span class="name">John Smith:</span>
-                                <span class="message">Hey there, I wanted to ask you something...</span>
-                                <span class="time"><i class="fa fa-clock-o"></i> 4:34 PM</span>
-                            </a>
-                        </li>
+                                                
+                        <?php
+                        if ($mensagens_menu)
+                        foreach ($mensagens_menu as $item_msg) {
+                        	echo "<li class=\"divider\"></li>
+								<li class=\"message-preview\">
+								<a href=\"" . base_url('dashboard/abrirEmail/' . $item_msg['id']) . "\">
+								<span class=\"avatar\"><img src=\"" . base_url('assets/img/email2.png') . "\"></span>
+								<span class=\"name\">" . $item_msg['nomecompleto'] . "</span>
+								<span class=\"message\">" . $item_msg['assunto'] . "</span>
+								<span class=\"time\"><i class=\"fa fa-clock-o\"></i>" . $item_msg['data_envio'] . "</span>
+								</a>
+                        		</li>";
+														}
+                            ?>
+
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url($pg_caixa_entrada); ?>">Ver todoas <?php
-							if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
-							}
+						if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
+						}
 						?></a></li>
                     </ul>
                 </li>
@@ -107,8 +97,8 @@
                     <ul class="dropdown-menu">
                         <li><a href="#"><i class="fa fa-user"></i>&nbsp; Perfil</a></li>
                         <li><a href="<?php echo base_url($pg_caixa_entrada); ?>"><i class="fa fa-envelope"></i>&nbsp; Caixa de Entrada <?php
-							if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
-							}
+						if ($novas_mensagens > 0) { echo "<span class=\"badge\">" . $novas_mensagens . "</span>";
+						}
 						?></a></li>
                         <li class="divider"></li>
                         <li><a href="<?php echo base_url($pg_sair)?>"><i class="fa fa-power-off"></i> Log Out</a></li>

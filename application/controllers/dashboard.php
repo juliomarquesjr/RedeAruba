@@ -2,7 +2,7 @@
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
 
-$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'novas_mensagens' => '0', 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login', 'pg_rel_dispositivos' => 'dashboard/rel_dispositivos', 'pg_caixa_entrada' => 'dashboard/caixa_entrada');
+$dados_menu = array('titulo' => "Aruba Server :: Servidor de Internet", 'mensagens_menu' => '0', 'novas_mensagens' => '0', 'titulo_interno' => 'Titulo', 'sub_titulo_interno' => 'Sub-Titulo da página', 'pg_ini' => 'index.php', 'pg_cad_usr' => 'dashboard/cad_user', 'pg_enviar_msg' => 'dashboard/enviar_msg', 'pg_cad_dispositivos' => 'dashboard/cad_dispositivos', 'pg_user_cadastrados' => 'dashboard/rel_usuarios', 'pg_envia_cobranca' => 'dashboard/cobranca', 'pg_sair' => 'login', 'pg_rel_dispositivos' => 'dashboard/rel_dispositivos', 'pg_caixa_entrada' => 'dashboard/caixa_entrada');
 class Dashboard extends CI_Controller {
 
 	/*
@@ -30,6 +30,12 @@ class Dashboard extends CI_Controller {
 		if ($numero) {
 			$dados_menu['novas_mensagens'] = $numero;
 		}
+
+		$mensagensMenu = $this->dashboard_model -> mostraMsgMenu($this->session->userdata('usuarioLogado'));
+		if($mensagensMenu){
+			$dados_menu['mensagens_menu'] = $mensagensMenu;
+		}
+		
 
 		//$mensagens = $this -> dashboard_model -> mostraMsgMenu($this -> session -> userdata('usuarioLogado'));
 
