@@ -9,7 +9,7 @@
 		</ol>
 		<?php
         echo form_open('dashboard/cad_user/' . $id, 'role="form"');
-
+		
         if ($this -> session -> flashdata('insereOK') == TRUE) :
             echo "<div class=\"alert alert-success alert-dismissable\">
                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
@@ -49,7 +49,7 @@
         /* Bloco do Usuario */
         echo "<div class=\"form-group\"><fieldset id=\"usuario\">
              <label name= \"bloco\" for=\"bloco\">Bloco / Pr&eacute;dio</label>";
-        echo form_dropdown('bloco', array('A' => 'Bloco A', 'B' => 'Bloco B', 'C' => 'Bloco C'), (validation_errors()) ? set_value('bloco') : $bloco, 'class="form-control"');
+        echo form_dropdown('bloco', array('A' => 'Bloco A', 'B' => 'Bloco B', 'C' => 'Bloco C'), (validation_errors()) ? set_value('perfil') : $bloco, 'class="form-control"');
         echo "</fieldset><br>
         <div>";
 
@@ -95,6 +95,13 @@
             echo form_input(array('name' => 'username', 'class' => 'form-control', 'placeholder' => 'Username'), (validation_errors()) ? set_value('username') : $username);
             echo "</div>";
         }
+
+		/* Perfil do Usuário */
+        echo "<div class=\"form-group\"><fieldset id=\"perfil\">
+             <label name= \"perfil\" for=\"perfil\">Perfil do Usuário</label>";
+        echo form_dropdown('perfil', array('1' => 'Administrador', '2' => 'Usuário Comum'), (validation_errors()) ? set_value('perfil') : $perfil, 'class="form-control"');
+        echo "</fieldset><br>
+        <div>";
 
         echo "<div class=\"form-group\">";
         echo form_submit(array('name' => 'botaoCadastrar', 'class' => 'btn btn-primary'), 'Incluir Usuário');

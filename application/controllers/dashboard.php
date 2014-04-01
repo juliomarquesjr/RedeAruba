@@ -31,11 +31,10 @@ class Dashboard extends CI_Controller {
 			$dados_menu['novas_mensagens'] = $numero;
 		}
 
-		$mensagensMenu = $this->dashboard_model -> mostraMsgMenu($this->session->userdata('usuarioLogado'));
-		if($mensagensMenu){
+		$mensagensMenu = $this -> dashboard_model -> mostraMsgMenu($this -> session -> userdata('usuarioLogado'));
+		if ($mensagensMenu) {
 			$dados_menu['mensagens_menu'] = $mensagensMenu;
 		}
-		
 
 		//$mensagens = $this -> dashboard_model -> mostraMsgMenu($this -> session -> userdata('usuarioLogado'));
 
@@ -74,14 +73,16 @@ class Dashboard extends CI_Controller {
 			$this -> form_validation -> set_rules('apartamento', 'Apartamento', 'required|alpha_numeric');
 			$this -> form_validation -> set_rules('username', "Username", 'required|aplha');
 			$this -> form_validation -> set_rules('bloco', "Bloco", 'required');
+			$this -> form_validation -> set_rules('perfil', 'Perfil', 'required');
 		} else {
 			$this -> form_validation -> set_rules('nomecompleto', 'Nome do Usuario', 'required|trim|is_unique[usuarios.nomecompleto]');
 			$this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
 			$this -> form_validation -> set_rules('email', 'E-mail', 'required|valid_email|is_unique[usuarios.email]');
 			$this -> form_validation -> set_rules('apartamento', 'Apartamento', 'required|alpha_numeric|is_unique[usuarios.apartamento]');
 			$this -> form_validation -> set_message('is_unique', 'Já existe um cadastro de %s, por favor tente outro.');
-			$this -> form_validation -> set_rules('username', "Username", 'required|aplha|is_unique[usuarios.username]');
-			$this -> form_validation -> set_rules('bloco', "Bloco", 'required');
+			$this -> form_validation -> set_rules('username', 'Username', 'required|aplha|is_unique[usuarios.username]');
+			$this -> form_validation -> set_rules('bloco', 'Bloco', 'required');
+			$this -> form_validation -> set_rules('perfil', 'Perfil', 'required');
 		}
 
 		$this -> form_validation -> set_rules('telefone', 'Telefone', 'required|alpha_numeric|');
@@ -94,7 +95,7 @@ class Dashboard extends CI_Controller {
 			}
 		} else {
 			//Cria array com dados do post.
-			$dadosBanco = elements(array('nomecompleto', 'email', 'apartamento', 'telefone', 'username', 'senha', 'bloco'), $this -> input -> post());
+			$dadosBanco = elements(array('nomecompleto', 'email', 'apartamento', 'telefone', 'username', 'senha', 'perfil', 'bloco'), $this -> input -> post());
 			//Insere mais uma linha no array do banco. Linha contendo a senha em MD5
 			$dadosBanco['senha'] = md5("1234");
 			//Chama o Model para inserir no banco, enviando a tabela a ser inserida e a página a ser redirecionada
@@ -224,12 +225,12 @@ class Dashboard extends CI_Controller {
 
 	public function rel_usuarios() {
 		global $dados_menu;
-		
+
 		//Seta o titulo interno da página
 		$dados_menu['titulo_interno'] = 'Relação de Usuários';
 		//Seta o menu da página
 		$dados_menu['sub_titulo_interno'] = '** Lista de usuarios que utilizam a rede';
-		
+
 		//Retorna a consulta com todos os usuarios do banco
 		$dadosBanco = array('usuarios' => $this -> dashboard_model -> get_all('usuarios'));
 
@@ -272,7 +273,7 @@ class Dashboard extends CI_Controller {
 
 		$this -> load -> view('rel_emails', $dadosBanco);
 		$this -> load -> view('includes/footer');
-	
+
 	}
 
 	/**
