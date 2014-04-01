@@ -38,7 +38,7 @@
                     if ($this->session->flashdata('erroLogin') == TRUE) {
                         echo "<div class=\"alert alert-danger alert-dismissable\">
                 <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>
-                <strong>Erro!</strong> Usuário ou Senha inválidos.
+                Usuário ou Senha inválidos.
                 </div>";
                     }
 

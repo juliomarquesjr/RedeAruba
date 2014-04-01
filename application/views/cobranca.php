@@ -31,15 +31,24 @@
 			echo form_error('valor');
 			echo "</div>";
 
+			echo "<div class=\"form-group\">";
+			echo "<label>Data da Cobrança</label>";
+            echo "<div class='input-group date' id='datetimepicker5' data-date-format=\"YYYY/MM/DD\">";
+            echo "<input type=\"text\" class=\"form-control\" id=\"datepicker\" placeholder=\"Data da cobrança\" />";        
+            echo "<span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i>";
+            echo "</span></div>";
+
 			echo "<div class=\"form-group\"><label>Descrição</label>";
 			echo form_textarea(array('name' => 'obs', 'class' => 'form-control', 'placeholder' => 'Descrição da cobrança'), set_value('obs'));
 			echo form_error('obs');
 			echo "</div>";
-
+			
 			echo form_submit(array('name' => 'enviar', 'class' => 'btn btn-primary', 'value' => 'Enviar cobrança'));
 			echo form_close();
             ?>
         </div>
+ 
+        
     </div>
 
 </div>
