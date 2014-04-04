@@ -17,7 +17,8 @@
 			/*
 			 * Fim da exibição de erros.
 			 */
-			echo "<div class=\"form-group\">" . "<label for=\"userativo\">Selecione o Destinat&aacute;rio</label>" . "<fieldset id=\"ativo\"> " . "<select class=\"form-control\" name=\"usuario\">";
+			echo "<div class=\"form-group\">" . "<label for=\"cliente\">Selecione o Destinat&aacute;rio</label>" . "<fieldset id=\"ativo\"> " . 
+			"<select class=\"form-control\" name=\"cliente\">";
 
 			foreach ($usuarios as $usuario) {
 				echo "<option value=\"" . $usuario['id'] . "\">" . $usuario['nomecompleto'] . "</option>";
@@ -32,15 +33,17 @@
 			echo "</div>";
 
 			echo "<div class=\"form-group\">";
-			echo "<label>Data da Cobrança</label>";
+			echo "<label>Data para Cobrança</label>";
             echo "<div class='input-group date' id='datetimepicker5' data-date-format=\"YYYY/MM/DD\">";
-            echo "<input type=\"text\" class=\"form-control\" id=\"datepicker\" placeholder=\"Data da cobrança\" />";        
+            echo "<input type=\"text\" class=\"form-control\" id=\"datepicker\" placeholder=\"Data da cobrança\" name=\"data_pagamento\" />";        
             echo "<span class=\"input-group-addon\"><i class=\"fa fa-calendar\"></i>";
             echo "</span></div>";
+       		echo form_error('data_pagamento');
+            echo "</div>";
 
 			echo "<div class=\"form-group\"><label>Descrição</label>";
-			echo form_textarea(array('name' => 'obs', 'class' => 'form-control', 'placeholder' => 'Descrição da cobrança'), set_value('obs'));
-			echo form_error('obs');
+			echo form_textarea(array('name' => 'descricao', 'class' => 'form-control', 'placeholder' => 'Descrição da cobrança'), set_value('obs'));
+			echo form_error('descricao');
 			echo "</div>";
 			
 			echo form_submit(array('name' => 'enviar', 'class' => 'btn btn-primary', 'value' => 'Enviar cobrança'));
