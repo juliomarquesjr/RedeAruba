@@ -67,18 +67,44 @@ class Dashboard_model extends CI_Model {
 	public function abrirEmail($id) {
 		$sql = "UPDATE mensagem SET nova = 'N' WHERE id = " . $id . ";";
 		$this -> db -> query($sql);
-		
+
 		$sql = "SELECT u.nomecompleto, m.assunto, DATE_FORMAT(m.data_envio, '%d/%m/%Y') AS data_envio, m.id, m.msg FROM mensagem m, usuarios u WHERE u.id = m.remetente AND m.id = '" . $id . "' ";
 		return $this -> db -> query($sql) -> row_array();
 
 	}
 
+	/**
+	 * Função para remover mensagens da caixa de entrada de entrada
+	 * Recebe o ID da mensagem
+	 */
 	public function removerEmail($id = NULL) {
 
 		if ($id) {
 			$this -> db -> where('id', $id);
 			$this -> db -> update('mensagem', array('removida' => 'S', 'nova' => 'N'));
 		}
+	}
+
+	public function removerUsuario($id = NULL) {
+		if ($id) {
+			$this -> db -> where(array('id' => $id));
+			$this->db->delete('usuarios');
+		
+		}
+	}
+
+	/**
+	 * Função para enviar cobranças para os usuários.
+	 * Recebe o Array com todos os dados do formulario e envia ao banco de dados.
+	 */
+	public function cadCobranca($dados = NULL) {
+		if ($dados) {
+			print_r($dados);
+
+			$this -> db -> insert('cobrancas', $dados);
+			//return TRUE;
+		}
+
 	}
 
 }

@@ -39,7 +39,9 @@
                     <td>" . $usuario['apartamento'] . "</td>
                     <td>" . $usuario['telefone'] . "</td>
                     <td>" . $usuario['username'] . "</td>
-                    <td align=\"center\"><a href=\"" . base_url('dashboard/cad_user/' . $usuario['id']) . "\"><i class=\"fa fa-edit\"></i></a>&nbsp;<i class=\"fa fa-trash-o\"</td>
+                    <td align=\"center\">
+                    <a href=\"" . base_url('dashboard/cad_user/' . $usuario['id']) . "\"><i class=\"fa fa-edit\"></i></a>&nbsp;
+                    <a href=\"" . base_url('dashboard/apagarUsuario/' . $usuario['id']) . "\"><i class=\"fa fa-trash-o\"></i></a></td>
                   </tr>";
         }
         ?>
