@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 28-Mar-2014 às 23:31
+-- Generation Time: 05-Abr-2014 às 00:59
 -- Versão do servidor: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -23,6 +23,22 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `cobranca`
+--
+
+CREATE TABLE IF NOT EXISTS `cobranca` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cliente` int(11) NOT NULL,
+  `data_cobranca` date NOT NULL,
+  `valor` decimal(8,2) NOT NULL,
+  `data_envio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `descricao` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `dispositivos`
 --
 
@@ -33,18 +49,16 @@ CREATE TABLE IF NOT EXISTS `dispositivos` (
   `ip` varchar(20) NOT NULL,
   `mac` varchar(20) NOT NULL,
   `data_criacao` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  PRIMARY KEY (`id`),
+  KEY `usuario` (`usuario`),
+  KEY `usuario_2` (`usuario`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `dispositivos`
 --
 
 INSERT INTO `dispositivos` (`id`, `usuario`, `nomedispositivo`, `ip`, `mac`, `data_criacao`) VALUES
-(1, 1, '12', '12', '123', '2014-03-23 21:23:06'),
-(2, 3, 'teste', '123', '123', '2014-03-23 21:26:03'),
-(3, 1, 'julio', '122', '1233', '2014-03-23 21:30:06'),
-(4, 1, 'Console Xbox', '1235', '12334', '2014-03-23 21:33:06'),
 (5, 5, 'Xbox 360', '123456', '1332478', '2014-03-23 23:14:03');
 
 -- --------------------------------------------------------
@@ -62,15 +76,10 @@ CREATE TABLE IF NOT EXISTS `mensagem` (
   `msg` text NOT NULL,
   `nova` varchar(1) DEFAULT 'S',
   `removida` varchar(1) DEFAULT 'N',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
-
---
--- Extraindo dados da tabela `mensagem`
---
-
-INSERT INTO `mensagem` (`id`, `usuario`, `remetente`, `assunto`, `data_envio`, `msg`, `nova`, `removida`) VALUES
-(5, 3, 1, 'Teste', '2014-03-28 10:11:26', 'Julio teste', 'S', 'N');
+  PRIMARY KEY (`id`),
+  KEY `remetente` (`remetente`),
+  KEY `remetente_2` (`remetente`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 -- --------------------------------------------------------
 
@@ -86,19 +95,35 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `apartamento` int(3) NOT NULL,
   `bloco` varchar(2) NOT NULL,
   `telefone` varchar(30) NOT NULL,
+  `perfil` int(2) NOT NULL COMMENT '1-admin, 2-usuario',
   `senha` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`id`, `nomecompleto`, `email`, `username`, `apartamento`, `bloco`, `telefone`, `senha`) VALUES
-(1, 'Julio Cesar Marques', 'juliomarquesjr@yahoo.com.br', 'juliomarquesjr', 405, 'B', '96200959', '81dc9bdb52d04dc20036dbd8313ed055'),
-(3, 'Ingrid Albuquerque', 'ingridejulio@hotmail.com', 'ingrid', 506, 'B', '96962525', '81dc9bdb52d04dc20036dbd8313ed055'),
-(4, 'João do Pulo', 'juliodopulo@gol.com', 'joaopulo', 809, 'A', '123', '81dc9bdb52d04dc20036dbd8313ed055'),
-(5, 'Roger', 'roger@bol.com.br', 'rogermarques', 307, 'B', '91915520', '81dc9bdb52d04dc20036dbd8313ed055');
+INSERT INTO `usuarios` (`id`, `nomecompleto`, `email`, `username`, `apartamento`, `bloco`, `telefone`, `perfil`, `senha`) VALUES
+(4, 'João do Pulo', 'juliodopulo@gol.com', 'joaopulo', 809, 'A', '123', 2, '81dc9bdb52d04dc20036dbd8313ed055'),
+(5, 'Roger', 'roger@bol.com.br', 'rogermarques', 307, 'B', '91915520', 2, '81dc9bdb52d04dc20036dbd8313ed055'),
+(6, 'Teste', 'teste@teste.com', 'teste222', 234, 'A', '12345', 2, '81dc9bdb52d04dc20036dbd8313ed055');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Limitadores para a tabela `dispositivos`
+--
+ALTER TABLE `dispositivos`
+  ADD CONSTRAINT `dispositivos_ibfk_1` FOREIGN KEY (`usuario`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
+
+--
+-- Limitadores para a tabela `mensagem`
+--
+ALTER TABLE `mensagem`
+  ADD CONSTRAINT `mensagem_ibfk_1` FOREIGN KEY (`remetente`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
