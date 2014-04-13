@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 05-Abr-2014 às 00:59
+-- Generation Time: 13-Abr-2014 às 23:27
 -- Versão do servidor: 5.6.16
 -- PHP Version: 5.5.9
 
@@ -29,12 +29,24 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `cobranca` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `cliente` int(11) NOT NULL,
-  `data_cobranca` date NOT NULL,
+  `data_pagamento` date NOT NULL,
   `valor` decimal(8,2) NOT NULL,
   `data_envio` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `descricao` text NOT NULL,
+  `status` varchar(1) DEFAULT 'N' COMMENT 'N - Nao Paga, P - Paga',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+
+--
+-- Extraindo dados da tabela `cobranca`
+--
+
+INSERT INTO `cobranca` (`id`, `cliente`, `data_pagamento`, `valor`, `data_envio`, `descricao`, `status`) VALUES
+(12, 4, '2014-04-09', '22.00', '2014-04-13 20:31:28', 'teste', 'N'),
+(13, 5, '2014-04-16', '25.00', '2014-04-13 20:31:57', 'Valor referente ao pagamento da internet.', 'N'),
+(14, 7, '2014-04-15', '12.00', '2014-04-13 21:13:51', 'teste', 'P'),
+(15, 7, '2014-04-30', '200.00', '2014-04-13 21:04:22', 'Pagamento da internet', 'N'),
+(16, 7, '2014-04-29', '100.00', '2014-04-13 21:05:06', 'teste', 'N');
 
 -- --------------------------------------------------------
 
@@ -52,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `dispositivos` (
   PRIMARY KEY (`id`),
   KEY `usuario` (`usuario`),
   KEY `usuario_2` (`usuario`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Extraindo dados da tabela `dispositivos`
@@ -79,7 +91,17 @@ CREATE TABLE IF NOT EXISTS `mensagem` (
   PRIMARY KEY (`id`),
   KEY `remetente` (`remetente`),
   KEY `remetente_2` (`remetente`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Extraindo dados da tabela `mensagem`
+--
+
+INSERT INTO `mensagem` (`id`, `usuario`, `remetente`, `assunto`, `data_envio`, `msg`, `nova`, `removida`) VALUES
+(1, 7, 5, 'Teste', '2014-04-13 11:52:05', 'Mensagem de teste', 'N', 'S'),
+(2, 7, 5, 'gsss', '2014-04-13 21:24:43', 'gdszgvvv', 'N', 'S'),
+(3, 7, 5, 'ggg', '2014-04-13 21:25:09', 'cccc', 'N', 'S'),
+(4, 5, 5, 'ccccc', '2014-04-13 21:25:29', 'cxczcxxczxczcxzxxcz', 'N', 'S');
 
 -- --------------------------------------------------------
 
@@ -98,7 +120,7 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
   `perfil` int(2) NOT NULL COMMENT '1-admin, 2-usuario',
   `senha` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Extraindo dados da tabela `usuarios`
@@ -107,7 +129,8 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 INSERT INTO `usuarios` (`id`, `nomecompleto`, `email`, `username`, `apartamento`, `bloco`, `telefone`, `perfil`, `senha`) VALUES
 (4, 'João do Pulo', 'juliodopulo@gol.com', 'joaopulo', 809, 'A', '123', 2, '81dc9bdb52d04dc20036dbd8313ed055'),
 (5, 'Roger', 'roger@bol.com.br', 'rogermarques', 307, 'B', '91915520', 2, '81dc9bdb52d04dc20036dbd8313ed055'),
-(6, 'Teste', 'teste@teste.com', 'teste222', 234, 'A', '12345', 2, '81dc9bdb52d04dc20036dbd8313ed055');
+(6, 'Teste', 'teste@teste.com', 'teste222', 234, 'A', '12345', 2, '81dc9bdb52d04dc20036dbd8313ed055'),
+(7, 'Julio Cesar Marques', 'juliomarquesjr@yahoo.com.br', 'juliomarquesjr', 405, 'B', '5596200959', 1, '81dc9bdb52d04dc20036dbd8313ed055');
 
 --
 -- Constraints for dumped tables
