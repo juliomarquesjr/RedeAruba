@@ -4,7 +4,7 @@
           <div class="col-lg-12">
               <h1><?php echo $titulo_interno ?> <small><?php echo $sub_titulo_interno; ?></small></h1>
             <ol class="breadcrumb">
-              <li><a href="<?php echo  base_url($pg_ini);?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+              <li><a href="<?php echo base_url($pg_ini); ?>"><i class="fa fa-dashboard"></i> Dashboard</a></li>
               
             </ol>
           </div>
@@ -42,7 +42,7 @@
             <div class="col-lg-8">
             <div class="panel panel-primary">
               <div class="panel-heading">
-                  <h3 class="panel-title"><i class="fa fa-money"></i>&nbsp;Transações financeiras</h3>
+                  <h3 class="panel-title"><i class="fa fa-money"></i>&nbsp;Transações Financeiras</h3>
               </div>
               <div class="panel-body">
                 <div class="table-responsive">
@@ -56,43 +56,25 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td>3326</td>
-                        <td>10/21/2013</td>
-                        <td>3:29 PM</td>
-                        <td>$321.33</td>
-                      </tr>
-                      <tr>
-                        <td>3325</td>
-                        <td>10/21/2013</td>
-                        <td>3:20 PM</td>
-                        <td>$234.34</td>
-                      </tr>
-                      <tr>
-                        <td>3324</td>
-                        <td>10/21/2013</td>
-                        <td>3:03 PM</td>
-                        <td>$724.17</td>
-                      </tr>
-                      <tr>
-                        <td>3323</td>
-                        <td>10/21/2013</td>
-                        <td>3:00 PM</td>
-                        <td>$23.71</td>
-                      </tr>
-                      <tr>
-                        <td>3322</td>
-                        <td>10/21/2013</td>
-                        <td>2:49 PM</td>
-                        <td>$8345.23</td>
-                      </tr>
-                      <tr>
-                        <td>3321</td>
-                        <td>10/21/2013</td>
-                        <td>2:23 PM</td>
-                        <td>$245.12</td>
-                      </tr>
-                     
+                    <?php
+
+					foreach ($faturas as $fat) {
+
+						echo "<tr>
+                        <td>" . $fat['id'] . "</td>
+                        <td>" . date("d/m/Y", strtotime($fat['data_pagamento'])) . "</td>
+                        <td>R$ " . str_replace('.', ',', $fat['valor']) . "</td>";
+
+						if ($fat['status'] == 'P')
+							echo "<td><span class=\"label label-success\">Pago</span></td>";
+
+						if ($fat['status'] == 'N')
+							echo "<td><span class=\"label label-warning\">Pendente</span></td>";
+
+						echo "</tr>";
+
+					}
+                    ?>
                     </tbody>
                   </table>
                 </div>

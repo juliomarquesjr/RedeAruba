@@ -88,11 +88,17 @@ class Dashboard_model extends CI_Model {
 	public function removerUsuario($id = NULL) {
 		if ($id) {
 			$this -> db -> where(array('id' => $id));
-			$this->db->delete('usuarios');
-		
+			$this -> db -> delete('usuarios');
+
 		}
 	}
 
-	
+	public function buscarFaturasUsuario($id = NULL) {
+		if($id){
+			$this->db->where(array('cliente' => $id['id']));
+			return $this->db->get('cobranca')->result_array();
+		}
+
+	}
 
 }

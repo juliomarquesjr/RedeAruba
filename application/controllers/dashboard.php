@@ -42,10 +42,13 @@ class Dashboard extends CI_Controller {
 
 	public function index() {
 		global $dados_menu;
+
+		$faturas = array('faturas' => $this -> dashboard_model -> buscarFaturasUsuario($this -> session -> userdata('usuarioLogado')));
+
 		$dados_menu['titulo_interno'] = 'Página Inicial';
 		$this -> load -> view('includes/reader', $dados_menu);
 		$this -> load -> view('includes/menu_navegacao');
-		$this -> load -> view('dashboard');
+		$this -> load -> view('dashboard', $faturas);
 		$this -> load -> view('includes/footer');
 	}
 
@@ -137,12 +140,15 @@ class Dashboard extends CI_Controller {
 			$this -> load -> view('cad_dispositivos', $usuarios);
 		} else {
 			$dados = elements(array('usuario', 'nomedispositivo', 'ip', 'mac'), $this -> input -> post());
-
 			$this -> dashboard_model -> do_insert($dados, 'dispositivos', 'dashboard/cad_dispositivos');
 		}
 
 		$this -> load -> view('includes/footer');
 	}
+
+	/**
+	 * Envia mensagens entre usuarios cadastrados.
+	 */
 
 	public function enviar_msg() {
 		global $dados_menu;
@@ -223,9 +229,10 @@ class Dashboard extends CI_Controller {
 			//Formata data para enviar ao banco de dados
 			$dadosFormulario['data_pagamento'] = implode("-", array_reverse(explode("/", $dadosFormulario['data_pagamento'])));
 			//Chama Model para cadastrar a cobrança.
-			
-			$this -> dashboard_model -> do_insert($dadosFormulario, 'cobranca', 'dashboard/cobranca');if($this -> dashboard_model -> cadCobranca($dadosFormulario) == TRUE){
-				
+
+			$this -> dashboard_model -> do_insert($dadosFormulario, 'cobranca', 'dashboard/cobranca');
+			if ($this -> dashboard_model -> cadCobranca($dadosFormulario) == TRUE) {
+
 			}
 		}
 
