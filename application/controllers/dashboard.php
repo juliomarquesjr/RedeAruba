@@ -206,10 +206,8 @@ class Dashboard extends CI_Controller {
 
 		//Regras de validação do formulario
 		$this -> form_validation -> set_rules('valor', 'Valor cobrado', 'required|numeric');
-		//$this -> form_validation -> set_rules('usuario', 'Usuario', 'required');
 		$this -> form_validation -> set_rules('descricao', 'Descrição da Cobrança', 'required');
 		$this -> form_validation -> set_rules('data_pagamento', 'Data para Cobrança', 'required');
-		//$this -> form_validation -> set_rules('');
 
 		$dadosBanco = array('usuarios' => $this -> dashboard_model -> get_all('usuarios'));
 
@@ -222,8 +220,13 @@ class Dashboard extends CI_Controller {
 			$this -> load -> view('cobranca', $dadosBanco);
 		} else {
 			$dadosFormulario = elements(array('cliente', 'valor', 'data_pagamento', 'descricao'), $this -> input -> post());
+			//Formata data para enviar ao banco de dados
+			$dadosFormulario['data_pagamento'] = implode("-", array_reverse(explode("/", $dadosFormulario['data_pagamento'])));
+			//Chama Model para cadastrar a cobrança.
 			
-			$this->dashboard_model->cadCobranca($dadosFormulario);
+			$this -> dashboard_model -> do_insert($dadosFormulario, 'cobranca', 'dashboard/cobranca');if($this -> dashboard_model -> cadCobranca($dadosFormulario) == TRUE){
+				
+			}
 		}
 
 		$this -> load -> view('includes/footer');
@@ -310,13 +313,13 @@ class Dashboard extends CI_Controller {
 
 		}
 	}
-	
+
 	/**
 	 * Função para apagar os usuarios. O banco de dados está configurado para remover em cascata
 	 * portanto qualquer mensagem ou dispositivo referente ao usuario será automaticamente removido
 	 */
-	public function apagarUsuario($id){
-		$this->dashboard_model->removerUsuario($id);
+	public function apagarUsuario($id) {
+		$this -> dashboard_model -> removerUsuario($id);
 		//redirect('dashboard/rel_usuarios');
 	}
 

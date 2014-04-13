@@ -93,18 +93,6 @@ class Dashboard_model extends CI_Model {
 		}
 	}
 
-	/**
-	 * Função para enviar cobranças para os usuários.
-	 * Recebe o Array com todos os dados do formulario e envia ao banco de dados.
-	 */
-	public function cadCobranca($dados = NULL) {
-		if ($dados) {
-			print_r($dados);
-
-			$this -> db -> insert('cobrancas', $dados);
-			//return TRUE;
-		}
-
-	}
+	
 
 }
