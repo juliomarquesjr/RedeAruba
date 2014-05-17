@@ -37,8 +37,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-money"></i>&nbsp; Pagamentos <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo base_url($pg_envia_cobranca); ?>">Enviar cobrança </a></li>
-                        <li><a href="#">Debitar pagamento </a></li>
-                        <li><a href="#">Rela&ccedil;&atilde;o de pagamentos</a></li>
+                        <li><a href="<?php echo base_url($pg_deb_cobranca);?>">Debitar pagamento </a></li>
+                        <li><a href="#">Rela&ccedil;&atilde;o de pagamentos</a></li>;
                     </ul>
                 </li>
                 <li><a href="#"><i class="fa fa-wrench"></i>&nbsp; Ferramentas</a></li>   
